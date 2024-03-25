@@ -27,8 +27,8 @@ export const Navbar = () => {
   }
 
   return (
-      <div className={`w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 text-${darkSide ? 'white' : 'black'}`}> 
-        <h1 className={`text-3xl font-bold text-[#00df9a]`}>Web Application</h1>
+      <div className={`p-8 fixed backdrop-filter backdrop-blur-lg border-b border-gray border-slate-600 w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 text-${darkSide ? 'white' : 'black'}`}> 
+        <h1 className={`text-2xl font-bold text-[#00df9a] `}>{`{Kuotes}`}</h1>
         <ul className='hidden md:flex'>
           {navItems.map(item => (
               <li
