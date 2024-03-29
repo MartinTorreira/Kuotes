@@ -8,13 +8,14 @@ import { Navbar } from './components/Navbar';
 function App() {
 
   return (
-    <div className={`min-h-screen flex flex-col items-center transition duration-200 dark:bg-gray-900 p-10}`}>
+    <div className={`min-h-screen flex flex-col items-center transition duration-200 dark:bg-[#25252F] p-10}`}>
     <BrowserRouter>
     <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path='/home' element={<Home />} />   
           <Route path="/users/signup" element={<Register/>} />      
-          <Route path="/users/login" element={<Login/>} />      
+          <Route path="/users/login" element={<Login/>} />
         </Routes>
       </BrowserRouter>
     </div>

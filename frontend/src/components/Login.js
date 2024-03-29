@@ -21,7 +21,6 @@ const Login = () => {
     }
 
     const onSuccess = (authenticatedUser) => {
-        console.log("onSuccess")
 		setToken(authenticatedUser.serviceToken);
 		setUser(authenticatedUser.user);
 
@@ -30,7 +29,8 @@ const Login = () => {
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
-		navigate("/users/");
+        console.log("LOGGED SUCCESSFULLY")
+		navigate("/home");
 
     }
 
@@ -39,7 +39,7 @@ const Login = () => {
     };
 
     const handleNavigate = (path) => {
-        navigate(`/users/${path}`);
+      //  navigate(`/users/${path}`);
     }
 
     return(
