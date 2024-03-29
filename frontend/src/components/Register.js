@@ -53,7 +53,7 @@ const Register = () => {
     return(
         <div className="w-full">
             <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 underline underline-offset-8 decoration-green-400">SIGN UP</h1>
-            <h2 className="flex justify-center mb-10 text-lg">Create a new account</h2>
+            <h2 className="flex justify-center m-5 text-lg">Create a new account</h2>
             <form onSubmit={handleRegister} className="max-w-sm mx-auto">
                 <div className="mb-5">
                     <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>

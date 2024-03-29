@@ -20,6 +20,11 @@ const Login = () => {
         console.log("reauthenticationCallback")
     }
 
+    const handleNavigate = (path) => {
+        navigate(`/users/${path}`);
+    }
+
+
     const onSuccess = (authenticatedUser) => {
 		setToken(authenticatedUser.serviceToken);
 		setUser(authenticatedUser.user);
@@ -29,19 +34,16 @@ const Login = () => {
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
-        console.log("LOGGED SUCCESSFULLY")
-		navigate("/home");
+		handleNavigate("profile")
 
     }
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault();
         login(userName, password, onSuccess, onErrors, reauthenticationCallback);
     };
 
-    const handleNavigate = (path) => {
-      //  navigate(`/users/${path}`);
-    }
-
+    
     return(
         <div className="w-full mt-10">
             <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 underline underline-offset-8 decoration-green-400">LOG IN</h1>
@@ -50,7 +52,7 @@ const Login = () => {
                 <div className="mb-5">
                     <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                     <input 
-                        className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field"
+                        className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#25252F] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field"
                         type="text"
                         placeholder="Username"
                         value={userName}
@@ -61,7 +63,7 @@ const Login = () => {
                 <div className="mb-5">
                 <label htmlFor="base-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                 <input 
-                    className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#25252F] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="password"
                     placeholder="Password"
                     value={password}
