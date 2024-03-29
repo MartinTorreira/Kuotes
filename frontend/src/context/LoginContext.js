@@ -12,7 +12,7 @@ export function LoginProvider ({ children }) {
                 token,
                 setToken,
                 user,
-                setUser
+                setUser,
                 }}>
                 {children}
             </LoginContext.Provider>

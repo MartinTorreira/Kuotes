@@ -4,7 +4,7 @@ import {config} from "../config/constants.js";
 
 const Home = () => {
 
-    let { setToken, setUser} = useContext(LoginContext);
+    let { token, setToken, setUser} = useContext(LoginContext);
 
     useEffect(() => {
         const bearer = localStorage.getItem(config.SERVICE_TOKEN_NAME);
@@ -17,8 +17,11 @@ const Home = () => {
     }, [setToken, setUser]);
 
     return(
-        <div>
-           
+        <div className="mt-20 flex flex-col justify-content p-4 gap-4">
+           <h1 className="text-3xl font-bold">Home</h1>
+           <div className="container">
+                {token != null ? <h1>You are authenticated</h1> : <h1>Please log in</h1>}
+           </div>
         </div>
     );
 

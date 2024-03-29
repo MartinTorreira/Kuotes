@@ -15,6 +15,7 @@ const isJson = (response) => {
 // Maneja respuestas exitosas (códigos de estado 200-299).
 // Comprueba si la respuesta es exitosa (response.ok), y si lo es, llama a una función onSuccess con los datos de la respuesta. También maneja respuestas sin contenido (status 204).
 const handleOkResponse = (response, onSuccess) => {
+
 	if (!response.ok) {
 		return false;
 	}
@@ -33,6 +34,7 @@ const handleOkResponse = (response, onSuccess) => {
 	} else {
 		response.blob().then((blob) => onSuccess(blob));
 	}
+
 
 	return true;
 };
@@ -80,7 +82,7 @@ export const setReauthenticationCallback = (callback) =>
 	(reauthenticationCallback = callback);
 
 export const setServiceToken = (serviceToken) =>
-	localStorage.setItem(config.SERVICE_TOKEN_NAME, serviceToken); //sesion storage es como localstorage pero se borra al cerrar el navegador
+	localStorage.setItem(config.SERVICE_TOKEN_NAME, serviceToken); 
 
 export const getServiceToken = () =>
 	localStorage.getItem(config.SERVICE_TOKEN_NAME);
@@ -119,4 +121,3 @@ export const appFetch = (path, options, onSuccess, onErrors) =>
 	fetch(`${config.BASE_PATH}${path}`, options)
 		.then((response) => handleResponse(response, onSuccess, onErrors))
 		.catch(networkErrorCallback);
-

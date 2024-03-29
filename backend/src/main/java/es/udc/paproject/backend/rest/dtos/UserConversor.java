@@ -1,5 +1,8 @@
 package es.udc.paproject.backend.rest.dtos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import es.udc.paproject.backend.model.entities.User;
 
 public class UserConversor {
@@ -21,6 +24,10 @@ public class UserConversor {
 		
 		return new AuthenticatedUserDto(serviceToken, toUserDto(user));
 		
+	}
+
+	public final static List<UserDto> toUserDtoList(List<User> users) {
+		return users.stream().map(p -> toUserDto(p)).collect(Collectors.toList());
 	}
 
 }

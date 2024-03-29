@@ -1,5 +1,6 @@
 package es.udc.paproject.backend.model.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import es.udc.paproject.backend.model.exceptions.IncorrectLoginException;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.udc.paproject.backend.model.exceptions.DuplicateInstanceException;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
+import static  es.udc.paproject.backend.rest.dtos.UserConversor.toUserDtoList;
+import es.udc.paproject.backend.rest.dtos.UserDto;
 import es.udc.paproject.backend.model.entities.User;
 import es.udc.paproject.backend.model.entities.UserDao;
 
@@ -92,4 +95,8 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public List<User> findAll() {
+		return userDao.findAll();
+	}
 }

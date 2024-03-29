@@ -5,6 +5,7 @@ import static es.udc.paproject.backend.rest.dtos.UserConversor.toUser;
 import static es.udc.paproject.backend.rest.dtos.UserConversor.toUserDto;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -36,6 +38,7 @@ import es.udc.paproject.backend.rest.common.JwtGenerator;
 import es.udc.paproject.backend.rest.common.JwtInfo;
 import es.udc.paproject.backend.rest.dtos.AuthenticatedUserDto;
 import es.udc.paproject.backend.rest.dtos.LoginParamsDto;
+import es.udc.paproject.backend.rest.dtos.UserConversor;
 import es.udc.paproject.backend.rest.dtos.UserDto;
 import es.udc.paproject.backend.rest.dtos.ChangePasswordParamsDto;
 
@@ -79,22 +82,25 @@ public class UserController {
 		
 	}
 
+	
 	@PostMapping("/signUp")
 	public ResponseEntity<AuthenticatedUserDto> signUp(
-		@Validated({UserDto.AllValidations.class}) @RequestBody UserDto userDto) throws DuplicateInstanceException {
-		
+			@Validated({ UserDto.AllValidations.class }) @RequestBody UserDto userDto)
+			throws DuplicateInstanceException {
+
 		User user = toUser(userDto);
-		
+
 		userService.signUp(user);
-		
-		URI location = ServletUriComponentsBuilder
-			.fromCurrentRequest().path("/{id}")
-			.buildAndExpand(user.getId()).toUri();
-	
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId())
+				.toUri();
+
 		return ResponseEntity.created(location).body(toAuthenticatedUserDto(generateServiceToken(user), user));
 
 	}
-	
+
+
+
 	@PostMapping("/login")
 	public AuthenticatedUserDto login(@Validated @RequestBody LoginParamsDto params)
 		throws IncorrectLoginException {
@@ -149,5 +155,12 @@ public class UserController {
 		return jwtGenerator.generate(jwtInfo);
 		
 	}
-	
+
+	@GetMapping("/userList")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<List<UserDto>> userList() {
+		List<User> users = userService.findAll();
+		List<UserDto> userDtos = UserConversor.toUserDtoList(users);
+		return ResponseEntity.ok().body(userDtos);
+	}
 }

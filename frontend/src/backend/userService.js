@@ -8,6 +8,7 @@ import {
 } from "./appFetch";
 
 const processLoginSignUp = (authenticatedUser, reauthenticationCallback, onSuccess) => {
+  console.log("ProcessLoginSignUp");
   setServiceToken(authenticatedUser.serviceToken);
   setReauthenticationCallback(reauthenticationCallback);
   onSuccess(authenticatedUser);
@@ -31,6 +32,17 @@ export const login = (
   );
 }
 
+export const signUp = (user, onSuccess, onErrors, reauthenticationCallback) => {
+  appFetch(
+    "/users/signUp",
+    fetchConfig("POST", user),
+    (authenticatedUser) => {
+      processLoginSignUp(authenticatedUser, reauthenticationCallback, onSuccess);
+    },
+    onErrors
+  );
+};
+
 
 export const tryLoginFromServiceToken = (
   onSuccess,
@@ -53,16 +65,7 @@ export const tryLoginFromServiceToken = (
   );
 };
 
-export const signUp = (user, onSuccess, onErrors, reauthenticationCallback) => {
-  appFetch(
-    "users/signUp",
-    fetchConfig("POST", user),
-    (authenticatedUser) => {
-      processLoginSignUp(authenticatedUser, reauthenticationCallback, onSuccess);
-    },
-    onErrors
-  );
-};
+
 
 export const logout = () => removeServiceToken();
 
