@@ -9,7 +9,8 @@ import { config } from '../config/constants';
 export const Navbar = () => {
   const { darkSide } = useTheme(); 
   const [nav, setNav] = useState(false);
-  const {token, setToken} = useContext(LoginContext);
+  const [profileDropdown, setProfileDropdown] = useState(false); // State to manage profile dropdown visibility
+  const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
   var CURRENT_PATH =  window.location.pathname;
@@ -20,7 +21,7 @@ export const Navbar = () => {
 
   const handleLogOut = () => {
     setToken(null);
-		localStorage.removeItem(config.SERVICE_TOKEN_NAME);
+    localStorage.removeItem(config.SERVICE_TOKEN_NAME);
   };
 
   const navItems = [
@@ -28,8 +29,6 @@ export const Navbar = () => {
     { id: 2, text: 'Sign up', url: '/users/signup',  logged: false, unLogged: true },
     { id: 3, text: 'Log in', url: '/users/login',  logged: false, unLogged: true },
     { id: 4, text: 'Log out', url: '/users/',  logged: true, unLogged: false },
-    { id: 5, text: <Switcher />,  logged: true, unLogged: true },
-
   ];
 
   const changeColor = (url) => {
@@ -39,16 +38,10 @@ export const Navbar = () => {
   }
 
   const handleNavigate = item  => {
-    //Lógica horrible por dios mejorarla
     if(item.text === "Log out")
       handleLogOut();
-
     navigate(item.url);
   }
-
-  // const filteredItems = navItems.filter(item => {
-  //   return (token !== null && item.logged) || (token === null && !item.logged);
-  // });
 
   const filteredItems = navItems.filter(item => {
     switch (token) {
@@ -64,7 +57,6 @@ export const Navbar = () => {
             {filteredItems.map(item => (
                 <li
                   key={item.id}
-
                   className={`p-2 font-medium hover:text-[#00df9a] rounded m-4 cursor-pointer duration-300 text-${changeColor(item.url)}`}
                   onClick={() => handleNavigate(item)}
                 >
@@ -72,6 +64,24 @@ export const Navbar = () => {
                 </li>
             ))}
           </ul>
+
+          {/* Profile dropdown */}
+          <div className="relative">
+            <img
+              src="image.png"
+              alt="Profile"
+              className="w-8 h-8 rounded-full cursor-pointer"
+              onClick={() => setProfileDropdown(!profileDropdown)}
+            />
+            {/* Dropdown content */}
+            {profileDropdown && (
+              <ul className="absolute top-10 right-0 dark:bg-[#25252F] dark:text-white border rounded shadow-md p-2 justify-center text-center">
+                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]">Profile</li>
+                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]">Settings</li>
+                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={handleLogOut}>Log out</li>
+              </ul>
+            )}
+          </div>
 
           <div onClick={handleNav} className='block md:hidden'>
             {nav ? <AiOutlineClose size={12} /> : <AiOutlineMenu size={12} />}
@@ -86,7 +96,7 @@ export const Navbar = () => {
           >
           
           </ul>
-            
+
       </div>
   );
 };
