@@ -1,5 +1,6 @@
 DROP INDEX UserIndexByUserName ON User;
 
+DROP TABLE IF EXISTS Quote;
 DROP TABLE IF EXISTS User;
 
 CREATE TABLE User (
@@ -15,3 +16,14 @@ CREATE TABLE User (
 ) ENGINE = InnoDB;
 
 CREATE INDEX UserIndexByUserName ON User (userName);
+
+CREATE TABLE Quote (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(60) NOT NULL,
+    description VARCHAR(255) ,
+    date DATE NOT NULL,
+    importance TINYINT,
+    userId BIGINT UNIQUE NOT NULL,
+    CONSTRAINT userIdFK FOREIGN KEY (userId) REFERENCES User(id),
+    CONSTRAINT QuotePK PRIMARY KEY (id)
+) ENGINE = InnoDB;
