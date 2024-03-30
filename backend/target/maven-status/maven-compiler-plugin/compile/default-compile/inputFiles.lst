@@ -18,6 +18,7 @@ C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backe
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\model\entities\UserDao.java
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\model\exceptions\InstanceNotFoundException.java
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\model\services\UserServiceImpl.java
+C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\rest\controllers\QuoteController.java
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\model\exceptions\IncorrectCreditCardInput.java
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\rest\common\ErrorsDto.java
 C:\Users\regis\Desktop\pa-10-master\backend\src\main\java\es\udc\paproject\backend\model\exceptions\NonExistentSessionException.java

@@ -35,6 +35,7 @@ es\udc\paproject\backend\model\entities\UserDao.class
 es\udc\paproject\backend\rest\dtos\QuoteConversor.class
 es\udc\paproject\backend\rest\common\JwtGenerator.class
 es\udc\paproject\backend\model\exceptions\IncorrectQuantityOfTickets.class
+es\udc\paproject\backend\rest\controllers\QuoteController.class
 es\udc\paproject\backend\rest\dtos\QuoteDto.class
 es\udc\paproject\backend\model\exceptions\PermissionException.class
 es\udc\paproject\backend\rest\dtos\UserDto$AllValidations.class

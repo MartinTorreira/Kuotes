@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Table(name="Quote")
 public class Quote {
 	
-	public enum Importance {VIEWER, TICKET_SELLER};
+	public enum Importance {LOW, MEDIUM, HIGH, CRITICAL};
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +35,9 @@ public class Quote {
     @Column(name = "importance", nullable = true, unique = false)
 	private Importance importance;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)  
     private User user;
-
 
     public Quote() {}
     

@@ -1,13 +1,12 @@
 package es.udc.paproject.backend.model.services;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import es.udc.paproject.backend.model.entities.Quote;
 import es.udc.paproject.backend.model.entities.QuoteDao;
@@ -15,8 +14,9 @@ import es.udc.paproject.backend.model.entities.User;
 import es.udc.paproject.backend.model.entities.UserDao;
 import es.udc.paproject.backend.model.entities.Quote.Importance;
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;
-import es.udc.paproject.backend.model.services.QuoteService;;
 
+@Service
+@Transactional
 public class QuoteServiceImpl implements QuoteService{
 
     private final UserDao userDao;
@@ -40,7 +40,8 @@ public class QuoteServiceImpl implements QuoteService{
         }
 
         Quote quote = new Quote(title, description, date, Importance.valueOf(importance), user);
-        return quote;
+
+        return quoteDao.save(quote);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class QuoteServiceImpl implements QuoteService{
 
     @Override
     public List<Quote> getQuotes() {
-        throw new UnsupportedOperationException("Unimplemented method 'getQuotes'");
+        return quoteDao.findAll();
     }
     
 }

@@ -23,7 +23,7 @@ CREATE TABLE Quote (
     description VARCHAR(255) ,
     date DATE NOT NULL,
     importance TINYINT,
-    userId BIGINT UNIQUE NOT NULL,
+    userId BIGINT NOT NULL,
     CONSTRAINT userIdFK FOREIGN KEY (userId) REFERENCES User(id),
     CONSTRAINT QuotePK PRIMARY KEY (id)
 ) ENGINE = InnoDB;

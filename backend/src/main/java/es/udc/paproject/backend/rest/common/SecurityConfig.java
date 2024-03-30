@@ -10,12 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -37,6 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, "/users/login").permitAll()
 			.antMatchers(HttpMethod.POST, "/users/loginFromServiceToken").permitAll()
 			.antMatchers(HttpMethod.GET, "/users/userList").permitAll()
+			.antMatchers(HttpMethod.POST, "/quotes/create").authenticated()
+			.antMatchers(HttpMethod.POST, "/quotes/delete/**").authenticated()
+			.antMatchers(HttpMethod.GET, "/quotes/list").authenticated()
 			// .antMatchers(HttpMethod.PUT, "/users/*").hasAnyRole("VIEWER", "TICKET_SELLER")
 			// .antMatchers(HttpMethod.POST, "/users/*/changePassword").hasAnyRole("VIEWER", "TICKET_SELLER")
 			// .antMatchers(HttpMethod.GET, "/catalog/billboard").permitAll()

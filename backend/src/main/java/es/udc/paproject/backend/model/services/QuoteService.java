@@ -1,7 +1,6 @@
 package es.udc.paproject.backend.model.services;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import es.udc.paproject.backend.model.exceptions.InstanceNotFoundException;

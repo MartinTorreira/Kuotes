@@ -1,5 +1,8 @@
 package es.udc.paproject.backend.rest.dtos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import es.udc.paproject.backend.model.entities.Quote;
 import es.udc.paproject.backend.model.entities.Quote.Importance;
 
@@ -17,4 +20,8 @@ public class QuoteConversor {
         return new Quote(quoteDto.getTitle(), quoteDto.getDescription(), quoteDto.getDate(),
                 Importance.valueOf(quoteDto.getImportance()), UserConversor.toUser(quoteDto.getUserDto()));
     }
+
+    public final static List<QuoteDto> toQuoteDtoList(List<Quote> quotes) {
+		return quotes.stream().map(p -> toQuoteDto(p)).collect(Collectors.toList());
+	}
 }
