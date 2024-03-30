@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { LoginContext } from "../context/LoginContext";
 import {config} from "../config/constants.js";
+import Quote from "./Quote.js";
 
 const Home = () => {
 
@@ -19,7 +20,9 @@ const Home = () => {
     return(
         <div className="mt-20 flex flex-col justify-content p-4 gap-4">
            <h1 className="text-3xl font-bold">Home</h1>
-           <div className="container">
+           <div className="">
+                <Quote />
+                <h1>A</h1>
            </div>
         </div>
     );
