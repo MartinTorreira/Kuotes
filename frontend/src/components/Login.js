@@ -34,7 +34,7 @@ const Login = () => {
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
-		handleNavigate("profile")
+		handleNavigate("home")
 
     }
 

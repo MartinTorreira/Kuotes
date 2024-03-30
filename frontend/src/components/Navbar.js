@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Switcher from './Switcher';
 import { useTheme } from '../context/ThemeContext'; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContext';
 import { config } from '../config/constants';
 
 export const Navbar = () => {
   const { darkSide } = useTheme(); 
   const [nav, setNav] = useState(false);
-  const [profileDropdown, setProfileDropdown] = useState(false); // State to manage profile dropdown visibility
+  const [profileDropdown, setProfileDropdown] = useState(false); 
   const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -65,23 +65,30 @@ export const Navbar = () => {
             ))}
           </ul>
 
-          {/* Profile dropdown */}
-          <div className="relative">
-            <img
-              src="image.png"
-              alt="Profile"
-              className="w-8 h-8 rounded-full cursor-pointer"
-              onClick={() => setProfileDropdown(!profileDropdown)}
-            />
-            {/* Dropdown content */}
-            {profileDropdown && (
-              <ul className="absolute top-10 right-0 dark:bg-[#25252F] dark:text-white border rounded shadow-md p-2 justify-center text-center">
-                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]">Profile</li>
-                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]">Settings</li>
-                <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={handleLogOut}>Log out</li>
-              </ul>
-            )}
-          </div>
+         {/* Profile dropdown */}
+        <div className="flex gap-4">
+          <Switcher />
+          <img
+            src="profile.png"
+            alt="Profile"
+            className="w-8 h-8 rounded-full cursor-pointer"
+            onClick={() => setProfileDropdown(!profileDropdown)}
+          />
+          {/* Dropdown content */}
+          {profileDropdown && (
+            <ul className="absolute top-12 right-10 dark:bg-[#25252F] dark:text-white border rounded shadow-md p-2 justify-center text-center">
+              <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
+                <Link to="users/profile">Profile</Link>
+              </li>
+              <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
+                <Link to="users/settings">Settings</Link>
+              </li>
+              <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
+                <p onClick={handleLogOut}>Log out</p>
+              </li>
+            </ul>
+          )}
+        </div>
 
           <div onClick={handleNav} className='block md:hidden'>
             {nav ? <AiOutlineClose size={12} /> : <AiOutlineMenu size={12} />}
