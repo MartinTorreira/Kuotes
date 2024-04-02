@@ -4,6 +4,9 @@ import { LoginContext } from "../context/LoginContext";
 import {config } from "../config/constants.js"
 import { useNavigate } from "react-router-dom";
 import InputForm from "./inputs/InputForm.js";
+import ButtonSubmit from "./inputs/ButtonSubmit.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -14,7 +17,10 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onErrors = () => {
-        console.log("onErrors")
+        toast.error("Incorrect fields", {
+            position: "bottom-center",
+            hideProgressBar: true,
+        });
     }
 
     const reauthenticationCallback = () => {
@@ -30,11 +36,14 @@ const Login = () => {
 		setToken(authenticatedUser.serviceToken);
 		setUser(authenticatedUser.user);
 
+        toast.success("Login successful");
 		localStorage.setItem(
 			config.SERVICE_TOKEN_NAME,
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
+        
+     
 		handleNavigate("home")
 
     }
@@ -67,18 +76,19 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <div className="flex justify-center">
-                    <button 
-                        className="bg-transparent hover:bg-green-400 font-semibold hover:text-black py-2 px-4 border-2 border-green-400 hover:border-transparent rounded"
-                        onSubmit={handleLogin}>
-                        Login
-                    </button>
-                </div>
+                <ButtonSubmit
+                    label={"Submit"}
+                    fn={handleLogin}
+                />
+                <ToastContainer
+                    theme="light"
+                    closeOnClick
+                    />
             </form>
             <p className="mt-8 flex justify-center gap-2">
                 Don't have an account? 
                     <button 
-                        onClick={() => handleNavigate("signup")} 
+                        onClick={() => handleNavigate("signup")}    
                         className="font-bold text-blue-500 hover:underline">Sign up
                     </button>
             </p>

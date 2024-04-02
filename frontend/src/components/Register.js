@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import {signUp} from "../backend/userService.js";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputForm from "./inputs/InputForm.js";
+import ButtonSubmit from "./inputs/ButtonSubmit.js";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Register = () => {
 
     const [userName, setUserName] = useState("");   
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState(""); 
     const [lastName, setLastName] = useState("");
@@ -39,9 +43,15 @@ const Register = () => {
         toast.error("You must sign up again");
     }
 
-
     const handleRegister = (e) => {
         e.preventDefault();
+        if (password !== password2) {
+            toast.error("Passwords do not match", {
+                position: "bottom-center",
+                hideProgressBar: true,
+            });
+            return;
+        }
         const user = getParams();
         signUp(user, onSuccess, onErrors, reauthenticationCallback);
     }
@@ -88,6 +98,14 @@ const Register = () => {
                 />
 
                 <InputForm
+                    label="Confirm password"
+                    type="password2"
+                    placeholder="Password"
+                    value={password2}
+                    onChange={(e) => setPassword2(e.target.value)}
+                />
+
+                <InputForm
                     label="Email"
                     type="email"
                     placeholder="Email"
@@ -95,6 +113,15 @@ const Register = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                
+               <ButtonSubmit
+                    label={"Submit"}
+                    fn={handleRegister}
+                />
+
+                <ToastContainer
+                    theme="light"
+                    closeOnClick
+                />
             </form>
             <p className="mt-8 flex justify-center gap-2">
                 Already have an account? 
