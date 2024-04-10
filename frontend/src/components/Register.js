@@ -31,7 +31,6 @@ const Register = () => {
     };
 
     const onSuccess = () => {
-        console.log("SUCCESS")
         navigate("/users/login")
     }
 
@@ -52,6 +51,11 @@ const Register = () => {
             });
             return;
         }
+
+        toast.success("Account created succesfully", {
+            position: "bottom-center",
+            hideProgressBar: true,
+        })
         const user = getParams();
         signUp(user, onSuccess, onErrors, reauthenticationCallback);
     }
@@ -62,8 +66,8 @@ const Register = () => {
 
     return(
         <div className="w-full">
-            <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 underline underline-offset-8 decoration-green-400">SIGN UP</h1>
-            <h2 className="flex justify-center m-5 text-lg">Create a new account</h2>
+            <h1 className="flex justify-center text-3xl font-bold mt-20 pt-10 p-4 underline underline-offset-8 decoration-green-400">REGISTER</h1>
+            <h2 className="flex justify-center mb-10 ">Create your account</h2>
             <form onSubmit={handleRegister} className="max-w-sm mx-auto">
                 <InputForm
                     label="Username"

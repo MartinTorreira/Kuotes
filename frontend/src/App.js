@@ -6,21 +6,26 @@ import Login from './components/Login';
 import { Navbar } from './components/Navbar';
 import  Profile  from './components/Profile';
 import Quote from './components/Quote';
+import '@fontsource-variable/onest';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function App() {
 
   return (
     <div className={`min-h-screen flex flex-col items-center transition duration-200 dark:bg-[#25252F] p-10}`}>
-    <BrowserRouter>
-    <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/home' element={<Home />} />   
-          <Route path="/users/signup" element={<Register/>} />      
-          <Route path="/users/login" element={<Login/>} />
-          <Route path="/users/profile" element={<Profile/>} />
-          <Route path="/quotes/create" element={<Quote/>} />
-        </Routes>
+      <BrowserRouter>
+      <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/home' element={<Home />} />   
+            <Route path="/users/signup" element={<Register/>} />      
+            <Route path="/users/login" element={<Login/>} />
+            <Route path="/users/profile" element={<Profile/>} />
+            <Route path="/quotes/create" element={<Quote/>} />
+          </Routes>
       </BrowserRouter>
     </div>
   );

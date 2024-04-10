@@ -5,8 +5,8 @@ import {config } from "../config/constants.js"
 import { useNavigate } from "react-router-dom";
 import InputForm from "./inputs/InputForm.js";
 import ButtonSubmit from "./inputs/ButtonSubmit.js";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
 
@@ -36,16 +36,17 @@ const Login = () => {
 		setToken(authenticatedUser.serviceToken);
 		setUser(authenticatedUser.user);
 
-        toast.success("Login successful");
 		localStorage.setItem(
 			config.SERVICE_TOKEN_NAME,
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
+		handleNavigate("home");
+        toast.success("Login successful", {
+            position: "bottom-center",
+            hideProgressBar: true,
         
-     
-		handleNavigate("home")
-
+        });
     }
 
     const handleLogin = (e) => {
@@ -56,10 +57,9 @@ const Login = () => {
     
     return(
         <div className="w-full mt-10">
-            <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 underline underline-offset-8 decoration-green-400">LOG IN</h1>
-            <h2 className="flex justify-center mb-10 ">Sign in to your account</h2>
+            <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 pt-10 underline underline-offset-8 decoration-green-400">LOG IN</h1>
+            <h2 className="flex justify-center mb-10">Sign in to your account</h2>
             <form onSubmit={handleLogin} className="max-w-sm mx-auto">
-
                 <InputForm
                     label="Username"
                     type="text"
@@ -80,16 +80,13 @@ const Login = () => {
                     label={"Submit"}
                     fn={handleLogin}
                 />
-                <ToastContainer
-                    theme="light"
-                    closeOnClick
-                    />
+                
             </form>
             <p className="mt-8 flex justify-center gap-2">
                 Don't have an account? 
                     <button 
                         onClick={() => handleNavigate("signup")}    
-                        className="font-bold text-blue-500 hover:underline">Sign up
+                        className=" font-bold text-blue-500 hover:underline hover:scale-105">Sign up
                     </button>
             </p>
         </div>

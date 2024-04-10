@@ -5,6 +5,8 @@ import { useTheme } from '../context/ThemeContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../context/LoginContext';
 import { config } from '../config/constants';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
 
 export const Navbar = () => {
   const { darkSide } = useTheme(); 
@@ -21,6 +23,11 @@ export const Navbar = () => {
 
   const handleLogOut = () => {
     setToken(null);
+    toast.success("Logged out successfully", {
+      position : "bottom-center",
+      hideProgressBar: true,
+
+    });
     localStorage.removeItem(config.SERVICE_TOKEN_NAME);
   };
 
@@ -28,7 +35,6 @@ export const Navbar = () => {
     { id: 1, text: 'Home', url: '/', logged: true , unLogged: true },
     { id: 2, text: 'Sign up', url: '/users/signup',  logged: false, unLogged: true },
     { id: 3, text: 'Log in', url: '/users/login',  logged: false, unLogged: true },
-    { id: 4, text: 'Log out', url: '/users/',  logged: true, unLogged: false },
   ];
 
   const changeColor = (url) => {
@@ -68,20 +74,21 @@ export const Navbar = () => {
          {/* Profile dropdown */}
         <div className="flex gap-4">
           <Switcher />
-          <img
-            src="profile.png"
-            alt="Profile"
-            className="w-8 h-8 rounded-full cursor-pointer"
-            onClick={() => setProfileDropdown(!profileDropdown)}
-          />
+          { token &&
+            <img
+              src="profile.png"
+              alt="Profile"
+              className="w-8 h-8 rounded-full cursor-pointer"
+              onClick={() => setProfileDropdown(!profileDropdown)}
+              
+            />
+          }
+
           {/* Dropdown content */}
-          {profileDropdown && (
+          { profileDropdown && (
             <ul className="absolute top-12 right-10 dark:bg-[#25252F] dark:text-white border rounded shadow-md p-2 justify-center text-center">
               <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
-                <Link to="users/profile">Profile</Link>
-              </li>
-              <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
-                <Link to="users/settings">Settings</Link>
+                <Link to="users/profile">Your profile</Link>
               </li>
               <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
                 <p onClick={handleLogOut}>Log out</p>
@@ -101,9 +108,8 @@ export const Navbar = () => {
                 : 'ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]'
             }
           >
-          
           </ul>
-
       </div>
+
   );
 };
