@@ -6,8 +6,8 @@ import Login from './components/Login';
 import { Navbar } from './components/Navbar';
 import  Profile  from './components/Profile';
 import Quote from './components/Quote';
+import {Account} from './components/Account';
 import '@fontsource-variable/onest';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -21,8 +21,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/home' element={<Home />} />   
-            <Route path="/users/signup" element={<Register/>} />      
+            <Route path="/users/signup" element={<Register/>} /> 
             <Route path="/users/login" element={<Login/>} />
+            <Route path="/users/account" element={<Account/>} />      
             <Route path="/users/profile" element={<Profile/>} />
             <Route path="/quotes/create" element={<Quote/>} />
           </Routes>

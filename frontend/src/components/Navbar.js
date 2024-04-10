@@ -29,13 +29,10 @@ export const Navbar = () => {
 
     });
     localStorage.removeItem(config.SERVICE_TOKEN_NAME);
+    navigate("/users/account");
   };
 
-  const navItems = [
-    { id: 1, text: 'Home', url: '/', logged: true , unLogged: true },
-    { id: 2, text: 'Sign up', url: '/users/signup',  logged: false, unLogged: true },
-    { id: 3, text: 'Log in', url: '/users/login',  logged: false, unLogged: true },
-  ];
+ 
 
   const changeColor = (url) => {
     if ( CURRENT_PATH === url ) {
@@ -49,27 +46,10 @@ export const Navbar = () => {
     navigate(item.url);
   }
 
-  const filteredItems = navItems.filter(item => {
-    switch (token) {
-      case null : return item.unLogged;
-      default : return item.logged;
-    }
-  });
 
   return (
     <div className={`p-8 fixed mb-10 backdrop-filter backdrop-blur-lg border-b border-gray border-slate-600 w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 text-${darkSide ? 'white' : 'black'}`}> 
-       <h1 className={`text-2xl font-bold text-[#00df9a] align-left justify-start `}>{`{Kuotes}`}</h1>
-          <ul className='hidden md:flex'>
-            {filteredItems.map(item => (
-                <li
-                  key={item.id}
-                  className={`p-2 font-medium hover:text-[#00df9a] rounded m-4 cursor-pointer duration-300 text-${changeColor(item.url)}`}
-                  onClick={() => handleNavigate(item)}
-                >
-                  {item.text}
-                </li>
-            ))}
-          </ul>
+       <a href='/' className={`text-2xl font-bold text-[#00df9a] align-left justify-start `}>{`{Kuotes}`}</a>
 
          {/* Profile dropdown */}
         <div className="flex gap-4">

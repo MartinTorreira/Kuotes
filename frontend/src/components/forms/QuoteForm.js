@@ -9,14 +9,14 @@ const QuoteForm = () => {
                         <label class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2 dark:text-gray-200" for="grid-last-name">
                             Title *
                         </label>
-                        <input class="text bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-first-name" type="text" placeholder="A title"/>
+                        <input class="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-first-name" type="text" placeholder="A title"/>
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                     <label class="text-gray-900 text-xs font-bold mb-2 dark:text-gray-200 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                         Importance
                     </label>
                     <div class="relative">
-                        <select class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-state">
+                        <select class="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-state">
                         <option>Low</option>
                         <option>Medium</option>
                         <option>High</option>
@@ -33,13 +33,13 @@ const QuoteForm = () => {
                         <label class="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2 dark:text-gray-200" for="grid-last-name">
                             Date *
                         </label>
-                        <input class="text bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-first-name" type="text" placeholder="Jane"/>
+                        <input class="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-first-name" type="text" placeholder="Jane"/>
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" for="grid-last-name">
                             Hour *
                         </label>
-                        <input class="text bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-last-name" type="text" placeholder="Doe"/>
+                        <input class="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field" id="grid-last-name" type="text" placeholder="Doe"/>
                     </div>
               </div>
 
@@ -48,7 +48,7 @@ const QuoteForm = () => {
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" for="grid-password">
                     Description 
                 </label>
-                <textarea className="resize-none appearance-none block w-full  py-3 px-4 mb-3 text bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field " id="grid-password" placeholder="Enter the description here..."></textarea>
+                <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 input-field " id="grid-password" placeholder="Enter a description here..."></textarea>
                 </div>
              </div>
             </form>
