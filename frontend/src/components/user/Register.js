@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import {signUp} from "../backend/userService.js";
+import {signUp} from "../../backend/userService.js";
 import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
-import InputForm from "./inputs/InputForm.js";
-import ButtonSubmit from "./inputs/ButtonSubmit.js";
+import InputForm from "../inputs/InputForm.js";
+import ButtonSubmit from "../inputs/ButtonSubmit.js";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -68,7 +68,7 @@ const Register = () => {
         <div className="w-full">
             <h1 className="flex justify-center text-3xl font-bold mt-20 pt-10 p-4 underline underline-offset-8 decoration-green-400">REGISTER</h1>
             <h2 className="flex justify-center mb-10 ">Create your account</h2>
-            <form onSubmit={handleRegister} className="max-w-sm mx-auto">
+            <form className="max-w-sm mx-auto">
                 <InputForm
                     label="Username"
                     type="text"

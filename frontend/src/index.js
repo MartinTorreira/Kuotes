@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from './context/ThemeContext';
-import { LoginProvider } from './context/LoginContext';
+import { LoginProvider } from './components/user/LoginContext';
+import { ThemeProvider } from './components/theme/ThemeContext';
 import { ToastContainer } from 'react-toastify';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

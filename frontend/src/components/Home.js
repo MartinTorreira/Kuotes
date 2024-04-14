@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "./user/LoginContext.js";
 import { config } from "../config/constants.js";
 import QuoteForm from "./forms/QuoteForm.js";
 import NewQuoteIcon from "../icons/NewQuoteIcon.js";
+import { Account } from "./user/Account.js";
+import ShowQuotes from "./quote/ShowQuotes.js";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +13,11 @@ const Home = () => {
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
+
+  const closeQuoteModal = () => {
+    setIsOpen(false);
+  };
+
 
   useEffect(() => {
     const bearer = localStorage.getItem(config.SERVICE_TOKEN_NAME);
@@ -30,30 +37,14 @@ const Home = () => {
         >
           <NewQuoteIcon />  Add a new quote
         </button>
-      ) : (
-        <div className="p-4 g-10 mt-20 flex flex-col">
-          <p>
-            You must be logged, please{" "}
-            <button className="hover:scale-105" href="/users/login">
-              Log in
-            </button>
-          </p>
-          <p>
-            Or create a new account{" "}
-            <button className="hover:scale-105" href="/users/signup">
-              Sign up
-            </button>
-          </p>
-        </div>
-      )}
+      ) : <Account />}
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
-          {/* Background overlay with blur effect */}
           <div className="modal-overlay absolute w-full h-full backdrop-filter backdrop-blur-[5px] " onClick={toggleModal}></div>
-          <div className="modal-container bg-white mx-auto rounded shadow-lg z-50 overflow-y-auto border-2 border-gray-400 dark:border-gray-600 rounded-lg transition-all">
+          <div className="modal-container bg-white mx-auto rounded shadow-lg z-50 border-2 border-gray-400 dark:border-gray-600 transition-all">
             <div className="p-4 modal-content text-left dark:bg-[#29292E] bg-gray-200 ">
               <div className="modal-header flex justify-between items-center pb-3">
-                <h3 className="text-3xl font-bold">Create a new quote</h3>
+                <h3 className="text-3xl font-bold">Create a quote</h3>
                 <button className="modal-close" onClick={toggleModal}>
                   <svg
                     className="dark:text-gray-200 text-gray-800 fill-current dark:hover:text-red-500 hover:text-red-500"
@@ -67,18 +58,16 @@ const Home = () => {
                 </button>
               </div>
               <div className="modal-body ">
-                <QuoteForm />
-                <div className="flex justify-end">
-                  <button className=" border-2 border-gray-800 py-3 px-3 mx-2 rounded-lg hover:bg-gray-800 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800 dark:border-gray-200  ">
-                    Add quote
-                  </button>
-                </div>
+                <QuoteForm  />
               </div>
-
             </div>
           </div>
         </div>
       )}
+
+      <div>
+        <ShowQuotes />
+      </div>
     </>
   );
 };

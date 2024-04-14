@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
-import Register from './components/Register';
-import Login from './components/Login';
 import { Navbar } from './components/Navbar';
-import  Profile  from './components/Profile';
-import Quote from './components/Quote';
-import {Account} from './components/Account';
+import Register from './components/user/Register';
+import Login from './components/user/Login';
+import  Profile  from './components/user/Profile';
+import {Account} from './components/user/Account';
+import Quote from './components/quote/Quote';
 import '@fontsource-variable/onest';
 import 'react-toastify/dist/ReactToastify.css';
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from "./LoginContext";
 
 
 const Profile = () => {

@@ -6,18 +6,16 @@ import {
 
   export const getQuotes = (onSuccess, onErrors) => {
     appFetch(
-        "quotes/list",
+        "/quotes/list",
         fetchConfig("GET"),
-        (quotes) => {
-            onSuccess(quotes)
-        },
+        onSuccess,
         onErrors
     );
-  }
+  };
 
   export const createQuote = (quote, onSuccess, onErrors) => {
     appFetch(
-        "quotes/create",
+        "/quotes/create",
         fetchConfig("POST", quote), onSuccess, onErrors
     );
   }

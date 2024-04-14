@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import useDarkSide from '../hook/useDarkSide';
+import useDarkSide from './useDarkSide';
 
 const ThemeContext = createContext({});
 

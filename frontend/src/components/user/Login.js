@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import { login } from "../backend/userService";
-import { LoginContext } from "../context/LoginContext";
-import {config } from "../config/constants.js"
+import { login } from "../../backend/userService.js";
+import { LoginContext } from "./LoginContext.js";
+import {config } from "../../config/constants.js"
 import { useNavigate } from "react-router-dom";
-import InputForm from "./inputs/InputForm.js";
-import ButtonSubmit from "./inputs/ButtonSubmit.js";
+import InputForm from "../inputs/InputForm.js";
+import ButtonSubmit from "../inputs/ButtonSubmit.js";
 import { toast } from 'react-toastify';
 
 
@@ -59,7 +59,7 @@ const Login = () => {
         <div className="w-full mt-10">
             <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 pt-10 underline underline-offset-8 decoration-green-400">LOG IN</h1>
             <h2 className="flex justify-center mb-10">Sign in to your account</h2>
-            <form onSubmit={handleLogin} className="max-w-sm mx-auto">
+            <form className="max-w-sm mx-auto">
                 <InputForm
                     label="Username"
                     type="text"
