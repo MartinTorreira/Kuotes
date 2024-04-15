@@ -1,28 +1,10 @@
-import { create } from 'zustand'
-import { getQuotes, createQuote } from '../../backend/quoteService.js'   
+// store/useQuoteStore.js
+import create from 'zustand';
 
-export const useQuoteStore = create((set) => ({
-
-    quotes: [],
-    setQuotes: (quotes) => set({ quotes }),
-
-
-
-    fetchQuotes: async () => {
-		try {
-			getQuotes(
-				(data) => {
-					set({ quotes: data.content });
-				},
-				(errors) => {
-					console.log(errors);
-				},
-			);
-		} catch (error) {
-			console.error(error);
-		}
-	},
-
-  
-
+const useQuoteStore = create((set) => ({
+  quotes: [],
+  setQuotes: (newQuotes) => set({ quotes: newQuotes }),
 }));
+
+export default useQuoteStore;
+

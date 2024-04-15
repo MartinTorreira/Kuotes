@@ -11,6 +11,8 @@ import {
         onSuccess,
         onErrors
     );
+
+    
   };
 
   export const createQuote = (quote, onSuccess, onErrors) => {
@@ -22,8 +24,9 @@ import {
 
 
   export const deleteQuote = (quoteId, onSuccess, onErrors) => {
+    console.log("quoteId", quoteId);
     appFetch(
-        `quotes/delete/${quoteId}`,
+        `/quotes/delete/${quoteId}`,
         fetchConfig("DELETE", onSuccess, onErrors)
     );
   }

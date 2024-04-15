@@ -54,7 +54,7 @@ public class QuoteServiceImpl implements QuoteService{
 
         // Check if the user is the owner of the quote
         if (quote.getUser().getId() != user.getId()) {
-            throw new InstanceNotFoundException("quoteId", "Quote");
+            throw new InstanceNotFoundException("quoteId", quoteId);
         }
 
         quoteDao.delete(quote);

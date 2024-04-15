@@ -5,7 +5,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import dayjs from "dayjs";
 import { createQuote } from "../../backend/quoteService";
-import { toast } from "react-toastify";
 
 
 const QuoteForm = () => {
@@ -47,9 +46,10 @@ const QuoteForm = () => {
     }
 
     const handleSubmit = (e) => {
+        console.log("SUBMIT");
         const combinedDateTime = `${dateInput.startDate}T${hour.hour().toString().padStart(2, '0')}:${hour.minute().toString().padStart(2, '0')}:00`;
         const quote = getParams(combinedDateTime);
-        console.log(quote);
+       
         createQuote(quote, onSuccess, onErrors);
     }   
 

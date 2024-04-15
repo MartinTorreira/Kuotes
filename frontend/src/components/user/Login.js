@@ -42,7 +42,7 @@ const Login = () => {
 		);
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
 		handleNavigate("home");
-        toast.success("Login successful", {
+        toast.success("You have logged successfully", {
             position: "bottom-center",
             hideProgressBar: true,
         
@@ -59,7 +59,7 @@ const Login = () => {
         <div className="w-full mt-10">
             <h1 className="flex justify-center text-3xl font-bold mt-20 p-4 pt-10 underline underline-offset-8 decoration-green-400">LOG IN</h1>
             <h2 className="flex justify-center mb-10">Sign in to your account</h2>
-            <form className="max-w-sm mx-auto">
+            <form className="max-w-sm mx-auto" onSubmit={handleLogin}>
                 <InputForm
                     label="Username"
                     type="text"

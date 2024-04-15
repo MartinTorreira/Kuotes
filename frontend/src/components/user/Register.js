@@ -68,7 +68,7 @@ const Register = () => {
         <div className="w-full">
             <h1 className="flex justify-center text-3xl font-bold mt-20 pt-10 p-4 underline underline-offset-8 decoration-green-400">REGISTER</h1>
             <h2 className="flex justify-center mb-10 ">Create your account</h2>
-            <form className="max-w-sm mx-auto">
+            <form className="max-w-sm mx-auto" onSubmit={handleRegister}>
                 <InputForm
                     label="Username"
                     type="text"
@@ -121,11 +121,7 @@ const Register = () => {
                     label={"Submit"}
                     fn={handleRegister}
                 />
-
-                <ToastContainer
-                    theme="light"
-                    closeOnClick
-                />
+              
             </form>
             <p className="mt-8 flex justify-center gap-2">
                 Already have an account? 

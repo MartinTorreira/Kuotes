@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/quotes/**").authenticated()
 			.antMatchers(HttpMethod.POST, "/quotes/**").authenticated()
 			.antMatchers(HttpMethod.POST, "/quotes/create").authenticated()
+			.antMatchers(HttpMethod.DELETE, "/quotes/delete/**").authenticated()
 
 			// .antMatchers(HttpMethod.PUT, "/users/*").hasAnyRole("VIEWER", "TICKET_SELLER")
 			// .antMatchers(HttpMethod.POST, "/users/*/changePassword").hasAnyRole("VIEWER", "TICKET_SELLER")
