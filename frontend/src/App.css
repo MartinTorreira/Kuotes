@@ -48,3 +48,8 @@
 .light {
   color: black; 
 }
+
+::selection {
+  background-color: #00df9a; /* Cambia a tu color deseado */
+  color: black; /* Cambia a tu color deseado */
+}

@@ -4,8 +4,6 @@ import QuoteForm from "../forms/QuoteForm";
 
 const Quote = () => { 
 
-   
-    
     return (
         <QuoteForm /> 
     );
