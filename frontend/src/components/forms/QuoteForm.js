@@ -46,10 +46,8 @@ const QuoteForm = () => {
     }
 
     const handleSubmit = (e) => {
-        console.log("SUBMIT");
         const combinedDateTime = `${dateInput.startDate}T${hour.hour().toString().padStart(2, '0')}:${hour.minute().toString().padStart(2, '0')}:00`;
         const quote = getParams(combinedDateTime);
-       
         createQuote(quote, onSuccess, onErrors);
     }   
 

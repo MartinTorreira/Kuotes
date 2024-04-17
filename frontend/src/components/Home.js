@@ -28,12 +28,12 @@ const Home = () => {
     <>
       {token != null ? (
         <>
-          {/* <button
+          <button
             className="py-4 rounded-lg mt-20 bg-gray-100 dark:bg-[#25252f]  border dark:text-white dark:border-gray-200 dark:hover:bg-[#09cb93] dark:hover:text-gray-900 dark:hover:border-gray-900  gap-x-2 hover:text-black hover:bg-[#06c68c] hover:border-gray-800 text-black py-2 px-4  text-center inline-flex items-center border-gray-800  font-medium "
             onClick={toggleModal}
           >
             <NewQuoteIcon />  Add a new quote
-          </button> */}
+          </button>
           {isOpen && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
               <div className="modal-overlay absolute w-full h-full backdrop-filter backdrop-blur-[5px]" onClick={toggleModal}></div>

@@ -21,7 +21,7 @@ CREATE TABLE Quote (
     id BIGINT NOT NULL AUTO_INCREMENT,
     title VARCHAR(60) NOT NULL,
     description VARCHAR(255) ,
-    date DATE NOT NULL,
+    date DATETIME NOT NULL,
     importance TINYINT,
     userId BIGINT NOT NULL,
     CONSTRAINT userIdFK FOREIGN KEY (userId) REFERENCES User(id),
