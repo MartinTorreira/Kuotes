@@ -9,6 +9,7 @@ import {Account} from './components/user/Account';
 import Quote from './components/quote/Quote';
 import '@fontsource-variable/onest';
 import 'react-toastify/dist/ReactToastify.css';
+import ShowQuotes from './components/quote/ShowQuotes';
 
 
 
@@ -20,12 +21,14 @@ function App() {
       <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path='/home' element={<Home />} />   
+            <Route path='/users/home' element={<Home />} />   
             <Route path="/users/signup" element={<Register/>} /> 
             <Route path="/users/login" element={<Login/>} />
             <Route path="/users/account" element={<Account/>} />      
             <Route path="/users/profile" element={<Profile/>} />
+            <Route path="/quotes/show" element={<ShowQuotes/>} />
             <Route path="/quotes/create" element={<Quote/>} />
+
           </Routes>
       </BrowserRouter>
     </div>

@@ -24,7 +24,7 @@ import {
 
 
   export const deleteQuote = (quoteId, onSuccess, onErrors) => {
-    console.log("quoteId", quoteId);
+    console.log(quoteId )
     appFetch(
         `/quotes/delete/${quoteId}`,
         fetchConfig("DELETE", onSuccess, onErrors)

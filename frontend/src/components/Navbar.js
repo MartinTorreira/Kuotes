@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Switcher from '../components/theme/Switcher';
 import { useTheme } from '../components/theme/ThemeContext';
@@ -14,6 +14,20 @@ export const Navbar = () => {
   const [profileDropdown, setProfileDropdown] = useState(false); 
   const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup function to remove event listener on component unmount
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNav = () => {
     setNav(!nav);
@@ -32,7 +46,8 @@ export const Navbar = () => {
  
 
   return (
-    <div className={`p-8 fixed mb-10 backdrop-filter backdrop-blur-lg border-b border-gray border-slate-600 w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 text-${darkSide ? 'white' : 'black'}`}> 
+    <div className={` p-8 fixed mb-10 backdrop-filter backdrop-blur-lg border-b border-gray border-slate-600 w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 
+        text-${darkSide ? 'white' : 'black'} ${isScrolled ? 'opacity-0 transition duration-200 ease-in-out' : ''}`}> 
        <a href='/' className={`text-2xl font-bold text-[#00df9a] align-left justify-start `}>{`{Kuotes}`}</a>
 
          {/* Profile dropdown */}

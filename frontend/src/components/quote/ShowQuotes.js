@@ -1,14 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useQuoteStore from '../store/useQuoteStore';
 import { getQuotes, deleteQuote } from '../../backend/quoteService.js';
 import { importanceBg, lowerCaseExceptFirst } from '../utils/Typography.js';
 import { dateConverter } from '../utils/DateUtils.js';
+import TaskIcon from '../../icons/TaskIcon.js';
+import { useContext } from 'react';
+import { LoginContext } from '../user/LoginContext.js';
+import { config } from '../../config/constants.js';
+import QuoteForm from '../forms/QuoteForm.js';
+import CloseIcon from '../../icons/CloseIcon.js';
+import AddQuoteIcon from '../../icons/AddQuoteIcon.js';
 
 const ShowQuotes = () => {
     const { quotes, setQuotes } = useQuoteStore();
 
-    const removeQuote = (quote) => {
-        deleteQuote(quote.id);
+    const [isOpen, setIsOpen] = useState(false);
+    const { token, setToken, setUser } = useContext(LoginContext);
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    };
+
+
+    useEffect(() => {
+        const bearer = localStorage.getItem(config.SERVICE_TOKEN_NAME);
+        const user = localStorage.getItem("user");
+        if (bearer != null) {
+            setToken(bearer);
+            setUser(JSON.parse(user));
+        }
+    }, [setToken, setUser, token]);
+
+    const removeQuote = (quoteId) => {
+        deleteQuote(quoteId);
     };
 
     const onSuccess = (quoteList) => {
@@ -22,14 +46,31 @@ const ShowQuotes = () => {
 
     useEffect(() => {
         getQuotes(onSuccess, onErrors);
-    }, []);
-
+    }, [removeQuote]);
 
     return (
         <>
+            {isOpen && (
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+                    <div className="modal-overlay absolute w-full h-full backdrop-filter backdrop-blur-[5px]" onClick={toggleModal}></div>
+                    <div className="modal-container bg-white mx-auto rounded shadow-lg z-50 border-2 border-gray-300 dark:border-gray-600 transition-all w-full sm:max-w-lg md:max-w-lg">
+                        <div className="p-4 modal-content text-left dark:bg-[#29292E] bg-gray-200"  >
+                            <div className="modal-header flex justify-between items-center pb-3" >
+                                <h3 className="text-3xl font-bold">Create a quote</h3>
+                                <button className="modal-close" onClick={toggleModal}>
+                                    <CloseIcon />
+                                </button>
+                            </div>
+                            <div className="modal-fade"  >
+                                <QuoteForm />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <div className='mt-20 flex flex-row items-center justify-center gap-x-2'>
-                <h1 className="text-center font-bold text-3xl text-gray-900 dark:text-gray-100 mt-5 mb-10 p-2">Your tasks</h1>
-                <svg className='mb-4' xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3.5 5.5l1.5 1.5l2.5 -2.5" /><path d="M3.5 11.5l1.5 1.5l2.5 -2.5" /><path d="M3.5 17.5l1.5 1.5l2.5 -2.5" /><path d="M11 6l9 0" /><path d="M11 12l9 0" /><path d="M11 18l9 0" /></svg>
+                <h1 className="text-center font-bold text-3xl text-gray-900 dark:text-gray-100 mt-5 mb-10 p-2  underline underline-offset-8 decoration-green-400">Your quotes</h1>
             </div>
             <div className="shadow-xl md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[400px] overflow-y-auto">
                 <ul>
@@ -45,10 +86,8 @@ const ShowQuotes = () => {
                                         </span>
                                     </div>
                                 </div>
-
                                 <div className="flex items-center gap-x-1">
-
-                                    <button onClick={() => removeQuote(quote)}>
+                                    <button onClick={() => removeQuote(quote.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24" className='hover:fill-red-600 dark:hover:fill-red-600 dark:fill-gray-200'>
                                             <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 8 9 L 10 9 L 10 20 L 8 20 L 8 9 z M 14 9 L 16 9 L 16 20 L 14 20 L 14 9 z"></path>
                                         </svg>
@@ -58,6 +97,11 @@ const ShowQuotes = () => {
                         </li>
                     ))}
                 </ul>
+
+            </div>
+            <div className="flex flex-row mt-4 px-2 py-2 gap-x-1 sm:px-6  dark:bg-gray-700/50 items-center justify-between cursor-pointer bg-gray-200 hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-gray-500 border-y border-gray-400 dark:border-gray-500">
+                <AddQuoteIcon />
+                <button onClick={toggleModal} className="sm:text-s leading-6 text-gray-900 dark:text-gray-200 ">Add new quote</button>
             </div>
         </>
     );
