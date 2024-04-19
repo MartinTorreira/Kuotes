@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useQuoteStore from '../store/useQuoteStore';
-import { getQuotes, deleteQuote } from '../../backend/quoteService.js';
+import { deleteQuote, getQuotes } from '../../backend/quoteService.js';
 import { importanceBg, lowerCaseExceptFirst } from '../utils/Typography.js';
 import { dateConverter } from '../utils/DateUtils.js';
-import TaskIcon from '../../icons/TaskIcon.js';
 import { useContext } from 'react';
 import { LoginContext } from '../user/LoginContext.js';
 import { config } from '../../config/constants.js';
@@ -12,7 +11,7 @@ import CloseIcon from '../../icons/CloseIcon.js';
 import AddQuoteIcon from '../../icons/AddQuoteIcon.js';
 
 const ShowQuotes = () => {
-    const { quotes, setQuotes } = useQuoteStore();
+    const { quotes, setQuotes, removeQuote } = useQuoteStore();
 
     const [isOpen, setIsOpen] = useState(false);
     const { token, setToken, setUser } = useContext(LoginContext);
@@ -31,8 +30,10 @@ const ShowQuotes = () => {
         }
     }, [setToken, setUser, token]);
 
-    const removeQuote = (quoteId) => {
+ 
+    const handleDeleteQuote = (quoteId) => {
         deleteQuote(quoteId);
+        removeQuote(quoteId)
     };
 
     const onSuccess = (quoteList) => {
@@ -45,9 +46,16 @@ const ShowQuotes = () => {
     };
 
     useEffect(() => {
-        getQuotes(onSuccess, onErrors);
-    }, [removeQuote]);
+        getQuotes(
+            quoteList => {
+                const sortedQuotes = [...quoteList].sort((a, b) => new Date(b.date) - new Date(a.date));
+                setQuotes(sortedQuotes);
+            },
+            error => console.error("Error al cargar citas:", error)
+        );
+    }, []);
 
+    
     return (
         <>
             {isOpen && (
@@ -87,7 +95,7 @@ const ShowQuotes = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-x-1">
-                                    <button onClick={() => removeQuote(quote.id)}>
+                                    <button onClick={() => handleDeleteQuote(quote.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24" className='hover:fill-red-600 dark:hover:fill-red-600 dark:fill-gray-200'>
                                             <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 8 9 L 10 9 L 10 20 L 8 20 L 8 9 z M 14 9 L 16 9 L 16 20 L 14 20 L 14 9 z"></path>
                                         </svg>

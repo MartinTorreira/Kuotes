@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
 import dayjs from "dayjs";
 import { createQuote } from "../../backend/quoteService";
+import { TimePicker  } from 'antd';
+import ClockIcon from "../../icons/ClockIcon";
+import CalendarIcon from "../../icons/CalendarIcon";
 
 const QuoteForm = () => {
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [importance, setImportance] = useState("");
-    const [date, setDate] = useState(new Date());
-    const [hour, setHour] = useState(dayjs(new Date()));
+    const [date, setDate] = useState(null);
+    const [hour, setHour] = useState(dayjs('12:00', 'HH:mm'));
 
-    function getParams(dateTime) {
+    function getParams(date) {
         const quote = {
             title,
             description,
-            date: dateTime.toISOString(),
+            date: date.toISOString(),
             importance
         };
-
         return quote;
     }
 
@@ -30,27 +32,29 @@ const QuoteForm = () => {
         console.log("ERROR")
     }
 
-    const handleHourChange = (e) => {
-        setHour(dayjs(e.target.value, "HH:mm"));
+    const handleHourChange = (hour) => {
+        setHour(hour);
     }
 
+    const disabledDate = (current) => {
+        return current && current < dayjs().startOf('day');
+    };
+
     const handleSubmit = (e) => {
-        const combinedDateTime = new Date(date);
-        combinedDateTime.setHours(hour.hour());
-        combinedDateTime.setMinutes(hour.minute());
+        const combinedDateTime = dayjs(date).set('hour', hour.hour()).set('minute', hour.minute());
         const quote = getParams(combinedDateTime);
         createQuote(quote, onSuccess, onErrors);
     }
 
     return (
-        <div className="grid items-right gap-x-4 p-4 px-3 py-2 mt-5">
-            <form className="w-full max-w-lg">
+        <div className="grid items-right gap-x-4 p-4 px-3 py-2 mt-5 ">
+            <form className="w-full max-w-lg" >
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-last-name">
-                            Title *
+                            sad *
                         </label>
-                        <input className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 input-field" id="grid-first-name" type="text" placeholder="A title"
+                        <input className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  input-field" id="grid-first-name" type="text" placeholder="A title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -60,7 +64,7 @@ const QuoteForm = () => {
                             Importance
                         </label>
                         <div className="relative">
-                        <select className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm focus:outline-none focus:border-blue-500 rounded focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 input-field" id="grid-state"
+                            <select className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400  input-field" id="grid-state"
                                 value={importance}
                                 onChange={(e) => setImportance(e.target.value)}
                             >
@@ -69,8 +73,6 @@ const QuoteForm = () => {
                                 <option value="HIGH">High</option>
                                 <option value="CRITICAL">Critical</option>
                             </select>
-                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 dark:text-gray-200 text-gray-700">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,33 +82,50 @@ const QuoteForm = () => {
                             Date *
                         </label>
                         <DatePicker
-                            selected={date}
                             onChange={date => setDate(date)}
-                            dateFormat="yyyy-MM-dd"
-                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 input-field"
+                            disabledDate={disabledDate}
+                            needConfirm={false}
+                            className="dark:text-gray-400 bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                            value={date}
+                            suffixIcon={<CalendarIcon width="16" height="16"/>} 
+
                         />
                     </div>
+
                     <div className="w-full px-3 mb-6 md:mb-0 md:w-1/2">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-last-name">
                             Hour *
                         </label>
-                        <input className="text-gray-900 dark:text-gray- bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 input-field" type="time" value={hour.format("HH:mm")} onChange={handleHourChange} />
+                        <TimePicker
+                            onChange={handleHourChange}
+                            defaultOpenValue={dayjs('00:00', 'HH:mm')}
+                            value={hour}
+                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400"
+                            placeholder="Select a time"
+                            format="HH:mm"
+                            suffixIcon={<ClockIcon width="16" height="16"/>} 
+                        />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-2">
+
+                <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-password">
                             Description
                         </label>
-                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-500 dark:focus:border-gray-500 input-field " id="grid-password" placeholder="Enter a description here..."
+                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  input-field " id="grid-password" placeholder="Enter a description here..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
                 </div>
+
                 <div className="flex justify-end">
-                    <button type="submit" onClick={handleSubmit} className="border-2 border-gray-800 py-2 px-2 rounded-lg hover:bg-gray-800 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800 dark:border-gray-200">
-                        Create
+                    <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className=" border-2 border-gray-800 py-3 px-3 mx-2 rounded-lg hover:bg-gray-800 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800 dark:border-gray-200">
+                        Add quote
                     </button>
                 </div>
             </form>

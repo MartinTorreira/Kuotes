@@ -1,5 +1,4 @@
 import React from 'react';
-import ShowQuotes from '../quote/ShowQuotes';
 import TaskIcon from '../../icons/TaskIcon';
 
 function LandingPage() {
@@ -20,29 +19,29 @@ function LandingPage() {
         </div>
 
         <div className="w-full xl:w-2/5 overflow-hidden mx-auto">
-        <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-[#25252f] dark:border-gray-700">
+          <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-[#25252f] dark:border-gray-700">
             <h5 class="text-center mb-3 text-2xl font-bold text-gray-900 dark:text-white">
-                Our features
+              Our features
             </h5>
             <ul class="my-4 space-y-3">
-                <li>
-                    <a href="../quotes/show" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-100 hover:bg-gray-200 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        <TaskIcon width="24" height="24" className="" />
-                        <span class="flex-1 ms-3 whitespace-nowrap">Show your quotes</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/users/login" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-100 hover:bg-gray-200 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-key"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z" /><path d="M15 9h.01" /></svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Log in</span>
-                    </a>
-                </li>
+              <li>
+                <a href="../quotes/show" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-100 hover:bg-gray-200 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                  <TaskIcon width="24" height="24" className="" />
+                  <span class="flex-1 ms-3 whitespace-nowrap">Show your quotes</span>
+                </a>
+              </li>
+              <li>
+                <a href="/users/login" class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-100 hover:bg-gray-200 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-key"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z" /><path d="M15 9h.01" /></svg>
+                  <span class="flex-1 ms-3 whitespace-nowrap">Log in</span>
+                </a>
+              </li>
 
             </ul>
-        </div>
+          </div>
         </div>
 
-     
+
       </div>
     </div>
   );

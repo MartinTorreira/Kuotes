@@ -70,11 +70,11 @@ const Home = () => {
 
   return (
     <>
-    {token != null ? (
-      <LandingPage />
-    ) : <Account />}
-  </>
-);
+      {token != null ? (
+        <LandingPage />
+      ) : <Account />}
+    </>
+  );
 };
 
 
