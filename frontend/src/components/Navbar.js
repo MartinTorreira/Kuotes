@@ -22,14 +22,13 @@ export const Navbar = () => {
 
 
   useEffect(() => {
-    console.log(token)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [token, setToken]);
+  }, [setToken]);
 
   const handleNav = () => {
     setNav(!nav);
@@ -52,7 +51,7 @@ export const Navbar = () => {
   return (
     <div className={` p-8 fixed mb-10 backdrop-filter backdrop-blur-lg border-b border-gray border-gray-400 dark:border-gray-600 w-full bg-transparent flex justify-between items-center h-12 max-w-[1240px] mx-auto px-4 
         text-${darkSide ? 'white' : 'black'} ${isScrolled ? 'opacity-0 transition duration-200 ease-in-out' : ''}`}>
-      <a href='/' className={`text-2xl font-bold text-[#00df9a] align-left justify-start `}>{`{Kuotes}`}</a>
+      <button onClick={handleNavigate("/home")} className={`text-2xl font-bold text-[#00df9a] align-left justify-start `}>{`{Kuotes}`}</button>
 
       {/* Profile dropdown */}
       <div className="flex gap-4">
