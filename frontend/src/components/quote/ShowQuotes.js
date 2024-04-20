@@ -9,15 +9,22 @@ import { config } from '../../config/constants.js';
 import QuoteForm from '../forms/QuoteForm.js';
 import CloseIcon from '../../icons/CloseIcon.js';
 import AddQuoteIcon from '../../icons/AddQuoteIcon.js';
+import DeleteQuote from '../../icons/DeleteQuote.js';
 
 const ShowQuotes = () => {
     const { quotes, setQuotes, removeQuote } = useQuoteStore();
+    const [expandedId, setExpandedId] = useState(null);
+
 
     const [isOpen, setIsOpen] = useState(false);
     const { token, setToken, setUser } = useContext(LoginContext);
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
+    };
+
+    const toggleAccordion = (quoteId) => {
+        setExpandedId(expandedId === quoteId ? null : quoteId);
     };
 
 
@@ -30,7 +37,7 @@ const ShowQuotes = () => {
         }
     }, [setToken, setUser, token]);
 
- 
+
     const handleDeleteQuote = (quoteId) => {
         deleteQuote(quoteId);
         removeQuote(quoteId)
@@ -55,7 +62,7 @@ const ShowQuotes = () => {
         );
     }, []);
 
-    
+
     return (
         <>
             {isOpen && (
@@ -83,7 +90,9 @@ const ShowQuotes = () => {
             <div className="shadow-xl md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[400px] overflow-y-auto">
                 <ul>
                     {quotes.map((quote, index) => (
-                        <li key={index} className={index > 0 ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-[#332e38] border-t border-gray-100 dark:border-gray-700 transition duration-300 ease-in-out" : "dark:hover:bg-[#332e38] dark:hover:bg-opacity-30 cursor-pointer hover:bg-gray-100 hover:bg-opacity-100 transition duration-300 ease-in-out"}>
+                        <li key={index}
+                            className={index > 0 ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-[#332e38] border-t border-gray-100 dark:border-gray-700 transition duration-300 ease-in-out" : "dark:hover:bg-[#332e38] dark:hover:bg-opacity-30 cursor-pointer hover:bg-gray-100 hover:bg-opacity-100 transition duration-300 ease-in-out"}
+                            onClick={() => toggleAccordion(quote.id)}>
                             <div className="px-2 py-3 sm:px-6 flex items-center justify-between">
                                 <div className=''>
                                     <h3 className="sm:text-lg leading-6 text-gray-900 dark:text-gray-200 ">{quote.title}</h3>
@@ -96,16 +105,19 @@ const ShowQuotes = () => {
                                 </div>
                                 <div className="flex items-center gap-x-1">
                                     <button onClick={() => handleDeleteQuote(quote.id)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24" className='hover:fill-red-600 dark:hover:fill-red-600 dark:fill-gray-200'>
-                                            <path d="M 10 2 L 9 3 L 4 3 L 4 5 L 20 5 L 20 3 L 15 3 L 14 2 L 10 2 z M 5 7 L 5 20 C 5 21.1 5.9 22 7 22 L 17 22 C 18.1 22 19 21.1 19 20 L 19 7 L 5 7 z M 8 9 L 10 9 L 10 20 L 8 20 L 8 9 z M 14 9 L 16 9 L 16 20 L 14 20 L 14 9 z"></path>
-                                        </svg>
+                                        <DeleteQuote />
                                     </button>
                                 </div>
                             </div>
+
+                            {expandedId === quote.id && (
+                                <div className="px-2 py-3 sm:px-6">
+                                    <p className="text-sm text-gray-600 dark:text-gray-200">{quote.description}</p>
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>
-
             </div>
             <div className="flex flex-row mt-4 px-2 py-2 gap-x-1 sm:px-6  dark:bg-gray-700/50 items-center justify-between cursor-pointer bg-gray-200 hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-gray-500 border-y border-gray-400 dark:border-gray-500">
                 <AddQuoteIcon />
@@ -113,6 +125,8 @@ const ShowQuotes = () => {
             </div>
         </>
     );
+
+
 };
 
 export default ShowQuotes;

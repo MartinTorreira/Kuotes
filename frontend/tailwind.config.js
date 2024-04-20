@@ -6,7 +6,11 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        customFont: ['Onest', 'Onest Variable']
+      }
+    },
   },
 
   plugins: [
