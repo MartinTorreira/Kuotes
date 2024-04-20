@@ -22,6 +22,7 @@ CREATE TABLE Quote (
     title VARCHAR(60) NOT NULL,
     description VARCHAR(255) ,
     date DATETIME NOT NULL,
+    endDate DATETIME NOT NULL,
     importance TINYINT,
     userId BIGINT NOT NULL,
     CONSTRAINT userIdFK FOREIGN KEY (userId) REFERENCES User(id),

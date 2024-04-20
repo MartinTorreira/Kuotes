@@ -29,17 +29,21 @@ public class QuoteServiceImpl implements QuoteService{
     }
 
     @Override
-    public Quote createQuote(Long userId, String title, String description, LocalDateTime date, String importance)
+    public Quote createQuote(Long userId, String title, String description, LocalDateTime date, LocalDateTime endDate, String importance)
             throws InstanceNotFoundException {
 
         User user = userDao.findById(userId)
             .orElseThrow(() -> new InstanceNotFoundException("userId", "User"));
 
         if (date.isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Incorrect input date");
+            throw new IllegalArgumentException("Incorrect start date");
         }
 
-        Quote quote = new Quote(title, description, date, Importance.valueOf(importance), user);
+        if (endDate.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Incorrect end date");
+        }
+
+        Quote quote = new Quote(title, description, date, endDate, Importance.valueOf(importance), user);
 
         return quoteDao.save(quote);
     }
@@ -62,7 +66,7 @@ public class QuoteServiceImpl implements QuoteService{
     }
 
     @Override
-    public void updateQuote(Long quoteId, Long userId, String title, String description, LocalDateTime date, String importance)
+    public void updateQuote(Long quoteId, Long userId, String title, String description, LocalDateTime date, LocalDateTime endDate, String importance)
             throws InstanceNotFoundException {
         
         User user = userDao.findById(userId)
@@ -84,6 +88,7 @@ public class QuoteServiceImpl implements QuoteService{
         quote.setTitle(title);
         quote.setDescription(description);
         quote.setDate(date);
+        quote.setEndDate(endDate);
         quote.setImportance(Importance.valueOf(importance));
         
     }

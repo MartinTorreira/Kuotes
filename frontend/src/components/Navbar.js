@@ -8,6 +8,7 @@ import { config } from '../config/constants';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import CalendarIcon from '../icons/CalendarIcon';
+import TaskIcon from '../icons/TaskIcon';
 
 export const Navbar = () => {
   const { darkSide } = useTheme();
@@ -53,7 +54,10 @@ export const Navbar = () => {
 
       {/* Profile dropdown */}
       <div className="flex gap-4">
-      <button onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+      <button alt="your tasks" title='Your tasks' onClick={handleNavigate("/quotes/show")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+        <TaskIcon heigh="24" width="24" />
+      </button>
+      <button alt="calendar" title='Show calendar' onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
         <CalendarIcon heigh="24" width="24" />
       </button>
         <Switcher />

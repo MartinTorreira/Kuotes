@@ -15,18 +15,20 @@ public class QuoteDto {
     private String title;
     private String description;
     private LocalDateTime date;
+    private LocalDateTime endDate;
     private String importance;
     private UserDto userDto;
 
     public QuoteDto() {}
 
-    public QuoteDto(Long id, UserDto userDto, String title, String description, LocalDateTime date, String importance) {
+    public QuoteDto(Long id, UserDto userDto, String title, String description, LocalDateTime date, LocalDateTime endDate, String importance) {
 
         this.id = id;
         this.userDto = userDto;
         this.title = title;
         this.description = description;
         this.date = date;
+        this.endDate = date;
         this.importance = importance;
     }
 
@@ -63,6 +65,11 @@ public class QuoteDto {
         return date;
     }
 
+    @NotNull(groups={AllValidations.class})
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
     public String getImportance() {
         return importance;
     }
@@ -77,6 +84,10 @@ public class QuoteDto {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public void setImportance(String importance) {

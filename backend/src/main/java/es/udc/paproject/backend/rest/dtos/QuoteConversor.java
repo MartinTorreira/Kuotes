@@ -13,11 +13,11 @@ public class QuoteConversor {
 
     public final static QuoteDto toQuoteDto(Quote quote) {
         return new QuoteDto(quote.getId(), UserConversor.toUserDto(quote.getUser()), quote.getTitle(),
-                quote.getDescription(), quote.getDate(), quote.getImportance().toString());
+                quote.getDescription(), quote.getDate(), quote.getEndDate(), quote.getImportance().toString());
     }
 
     public final static Quote toQuote(QuoteDto quoteDto) {
-        return new Quote(quoteDto.getTitle(), quoteDto.getDescription(), quoteDto.getDate(),
+        return new Quote(quoteDto.getTitle(), quoteDto.getDescription(), quoteDto.getDate(), quoteDto.getEndDate(),
                 Importance.valueOf(quoteDto.getImportance()), UserConversor.toUser(quoteDto.getUserDto()));
     }
 

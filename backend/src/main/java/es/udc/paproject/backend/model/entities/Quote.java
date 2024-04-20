@@ -32,6 +32,9 @@ public class Quote {
     @Column(name = "date", nullable = false, unique = false)
 	private LocalDateTime date;
 
+    @Column(name = "endDate", nullable = false, unique = false)
+	private LocalDateTime endDate;
+
     @Column(name = "importance", nullable = true, unique = false)
 	private Importance importance;
 
@@ -41,10 +44,11 @@ public class Quote {
 
     public Quote() {}
     
-	public Quote(String title, String description, LocalDateTime date, Importance importance, User user) {
+	public Quote(String title, String description, LocalDateTime date, LocalDateTime endDate,Importance importance, User user) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.endDate = date;
         this.importance = importance;
         this.user = user;
     }
@@ -120,6 +124,16 @@ public class Quote {
     public Long getId() {
 		return id;
 	}
+
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
 
 
 }

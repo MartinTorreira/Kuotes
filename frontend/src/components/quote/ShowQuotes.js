@@ -16,12 +16,14 @@ const ShowQuotes = () => {
     const { quotes, setQuotes, removeQuote } = useQuoteStore();
     const [expandedId, setExpandedId] = useState(null);
 
-
     const [isOpen, setIsOpen] = useState(false);
     const { token, setToken, setUser } = useContext(LoginContext);
 
+    const [hasError, setHasError] = useState(false);
+
     const toggleModal = () => {
         setIsOpen(!isOpen);
+        setHasError(false);
     };
 
     const toggleAccordion = (quoteId) => {
@@ -78,7 +80,7 @@ const ShowQuotes = () => {
                                 </button>
                             </div>
                             <div className="modal-fade"  >
-                                <QuoteForm />
+                                <QuoteForm hasError={hasError}/>
                             </div>
                         </div>
                     </div>
