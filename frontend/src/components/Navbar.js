@@ -14,20 +14,22 @@ export const Navbar = () => {
   const { darkSide } = useTheme();
   const [nav, setNav] = useState(false);
   const [profileDropdown, setProfileDropdown] = useState(false);
-  const { token, setToken } = useContext(LoginContext);
   const navigate = useNavigate();
 
   const [isScrolled, setIsScrolled] = useState(false);
 
+  let { token, setToken } = useContext(LoginContext);
+
 
   useEffect(() => {
+    console.log(token)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [token, setToken]);
 
   const handleNav = () => {
     setNav(!nav);
@@ -54,20 +56,21 @@ export const Navbar = () => {
 
       {/* Profile dropdown */}
       <div className="flex gap-4">
-      <button alt="your tasks" title='Your tasks' onClick={handleNavigate("/quotes/show")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
-        <TaskIcon heigh="24" width="24" />
-      </button>
-      <button alt="calendar" title='Show calendar' onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
-        <CalendarIcon heigh="24" width="24" />
-      </button>
+        {token != null ? <>
+          <button alt="your tasks" title='Your tasks' onClick={handleNavigate("/quotes/show")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+            <TaskIcon heigh="24" width="24" />
+          </button>
+          <button alt="calendar" title='Show calendar' onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+            <CalendarIcon heigh="24" width="24" />
+          </button> </> : null}
         <Switcher />
-        {token &&
+        {token != null ? 
           <img
             src="profile.png"
             alt="Profile"
             className="w-8 h-8 rounded-full cursor-pointer"
             onClick={() => setProfileDropdown(!profileDropdown)}
-          />
+          /> : null
         }
 
         {/* Dropdown content */}

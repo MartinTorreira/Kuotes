@@ -26,7 +26,7 @@ function App() {
             <Route path="/users/account" element={<Account/>} />      
             <Route path="/users/profile" element={<Profile/>} />
             <Route path="/quotes/show" element={<ShowQuotes/>} />
-            <Route exact path="/quotes/calendar" element={<CalendarComponent/>} />
+            <Route path="/quotes/calendar" element={<CalendarComponent/>} />
           </Routes>
       </BrowserRouter>
     </div>

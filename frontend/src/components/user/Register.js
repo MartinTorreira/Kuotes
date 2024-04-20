@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import InputForm from "../inputs/InputForm.js";
 import ButtonSubmit from "../inputs/ButtonSubmit.js";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 

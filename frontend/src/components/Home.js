@@ -5,7 +5,7 @@ import { Account } from "./user/Account.js";
 import LandingPage from "./layouts/LandingPage.js";
 
 const Home = () => {
-  const { token, setToken, setUser } = useContext(LoginContext);
+  let { token, setToken, setUser } = useContext(LoginContext);
 
   useEffect(() => {
     const bearer = localStorage.getItem(config.SERVICE_TOKEN_NAME);

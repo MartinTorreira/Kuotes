@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
 
+    let { token } = useContext(LoginContext);
+
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const { setToken, setUser } = useContext(LoginContext); 
@@ -40,6 +42,7 @@ const Login = () => {
 			config.SERVICE_TOKEN_NAME,
 			`Bearer ${authenticatedUser.serviceToken}`,
 		);
+
 		localStorage.setItem("user", JSON.stringify(authenticatedUser.user));
 		handleNavigate("home");
         toast.success("You have logged successfully", {
@@ -52,6 +55,7 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         login(userName, password, onSuccess, onErrors, reauthenticationCallback);
+        console.log(token)
     };
 
     

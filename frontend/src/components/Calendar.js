@@ -9,7 +9,7 @@ import useQuoteStore from './store/useQuoteStore';
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = () => {
-  const { token } = useContext(LoginContext);
+
   const [events, setEvents] = useState([]);
   const { quotes } = useQuoteStore();
 
@@ -22,27 +22,23 @@ const CalendarComponent = () => {
       description: quote.description,
     }));
 
+
     setEvents(calendarEvents);
   }, [quotes]);
 
 
 
   return (
-    <>
-      {token !== null ?
-        <div className="mt-20 py-10">
-          <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 500 }}
-            className="dark:text-gray-200 text-gray-800"
-          />
-        </div> : <Account />
-      }
-
-    </>
+    <div className="mt-20 py-10">
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
+        className="dark:text-gray-200 text-gray-800"
+      />
+    </div>
   );
 };
 
