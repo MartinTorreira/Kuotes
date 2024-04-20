@@ -1,6 +1,5 @@
 package es.udc.paproject.backend.model.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface QuoteService {
 
     void updateQuote(Long quoteId, Long userId, String title, String description, LocalDateTime date, LocalDateTime endDate, String importance) throws InstanceNotFoundException;
 
-    List<Quote>  getQuotes();
+    List<Quote> getQuotes();
 }

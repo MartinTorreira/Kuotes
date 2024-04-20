@@ -39,7 +39,7 @@ public class QuoteServiceImpl implements QuoteService{
             throw new IllegalArgumentException("Incorrect start date");
         }
 
-        if (endDate.isBefore(LocalDateTime.now())) {
+        if (endDate.isBefore(date)) {
             throw new IllegalArgumentException("Incorrect end date");
         }
 

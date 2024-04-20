@@ -22,13 +22,12 @@ public class QuoteDto {
     public QuoteDto() {}
 
     public QuoteDto(Long id, UserDto userDto, String title, String description, LocalDateTime date, LocalDateTime endDate, String importance) {
-
         this.id = id;
         this.userDto = userDto;
         this.title = title;
         this.description = description;
         this.date = date;
-        this.endDate = date;
+        this.endDate = endDate;
         this.importance = importance;
     }
 

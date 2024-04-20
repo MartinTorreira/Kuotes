@@ -9,61 +9,41 @@ import useQuoteStore from './store/useQuoteStore';
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = () => {
-    const { token } = useContext(LoginContext);
-    const [events, setEvents] = useState([]);
-    const { quotes } = useQuoteStore();
+  const { token } = useContext(LoginContext);
+  const [events, setEvents] = useState([]);
+  const { quotes } = useQuoteStore();
 
-    const data = [
-        {
-          id: 1,
-          title: 'Reunión con el equipo',
-          start: new Date('2024-04-20T10:00:00'),
-          end: new Date('2024-04-20T12:00:00'),
-          description: 'Reunión semanal con el equipo para discutir los progresos del proyecto.',
-        },
-        {
-          id: 2,
-          title: 'Entrevista de trabajo',
-          start: new Date('2024-04-21T14:00:00'),
-          end: new Date('2024-04-21T16:00:00'),
-          description: 'Entrevista con un candidato para el puesto de desarrollador frontend.',
-        },
-        {
-          id: 3,
-          title: 'Capacitación de React',
-          start: new Date('2024-04-22T09:00:00'),
-          end: new Date('2024-04-22T17:00:00'),
-          description: 'Capacitación sobre los fundamentos de React para el equipo de desarrollo.',
-        },
-    ];
-    
-    useEffect(() => {
-        // Transformar citas en eventos para el calendario
-        const calendarEvents = quotes.map((quote) => ({
-          id: quote.id,
-          title: quote.title,
-          start: new Date(quote.date),
-          end: new Date(quote.date), 
-          description: quote.description,
-        }));
-    
-        setEvents(calendarEvents);
-      }, [quotes]);
-    
-      
+  useEffect(() => {
+    const calendarEvents = quotes.map((quote) => ({
+      id: quote.id,
+      title: quote.title,
+      start: new Date(quote.date),
+      end: new Date(quote.endDate),
+      description: quote.description,
+    }));
 
-    return (
+    setEvents(calendarEvents);
+  }, [quotes]);
+
+
+
+  return (
+    <>
+      {token !== null ?
         <div className="mt-20 py-10">
-            <Calendar
-                localizer={localizer}
-                events={events}
-                startAccessor="start"
-                endAccessor="end"
-                style={{ height: 500 }}
-                className="dark:text-gray-200 text-gray-800"
-            />
-        </div>
-    );
+          <Calendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 500 }}
+            className="dark:text-gray-200 text-gray-800"
+          />
+        </div> : <Account />
+      }
+
+    </>
+  );
 };
 
 

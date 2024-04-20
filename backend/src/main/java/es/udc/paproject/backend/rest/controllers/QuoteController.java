@@ -36,7 +36,7 @@ public class QuoteController {
     public ResponseEntity<QuoteDto> createQuote(@RequestAttribute Long userId, @RequestBody QuoteDto quoteDto) throws InstanceNotFoundException {
         
         Quote newQuote = quoteService
-            .createQuote(userId, quoteDto.getTitle(), quoteDto.getDescription(), quoteDto.getDate(),quoteDto.getEndDate(), quoteDto.getImportance());
+            .createQuote(userId, quoteDto.getTitle(), quoteDto.getDescription(), quoteDto.getDate(), quoteDto.getEndDate(), quoteDto.getImportance());
 
         QuoteDto dto = toQuoteDto(newQuote);
 

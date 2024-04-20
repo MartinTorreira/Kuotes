@@ -1,7 +1,5 @@
 package es.udc.paproject.backend.model.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,11 +42,11 @@ public class Quote {
 
     public Quote() {}
     
-	public Quote(String title, String description, LocalDateTime date, LocalDateTime endDate,Importance importance, User user) {
+	public Quote(String title, String description, LocalDateTime date, LocalDateTime endDate, Importance importance, User user) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.endDate = date;
+        this.endDate = endDate;
         this.importance = importance;
         this.user = user;
     }
