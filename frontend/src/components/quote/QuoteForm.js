@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { DatePicker } from 'antd';
 import dayjs from "dayjs";
 import { createQuote } from "../../backend/quoteService";
-import { TimePicker  } from 'antd';
+import { TimePicker } from 'antd';
 import ClockIcon from "../../icons/ClockIcon";
 import CalendarIcon from "../../icons/CalendarIcon";
+import { Button } from "@material-tailwind/react";
+
 
 const QuoteForm = () => {
 
@@ -52,9 +54,9 @@ const QuoteForm = () => {
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-last-name">
-                            sad *
+                            Title *
                         </label>
-                        <input className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  input-field" id="grid-first-name" type="text" placeholder="A title"
+                        <input className="bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-600" id="grid-first-name" type="text" placeholder="A title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -64,9 +66,11 @@ const QuoteForm = () => {
                             Importance
                         </label>
                         <div className="relative">
-                            <select className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400  input-field" id="grid-state"
+                            <select 
+                                className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400 input-field focus:ring-gray-600 dark:focus:ring-gray-600 " id="grid-state"
                                 value={importance}
                                 onChange={(e) => setImportance(e.target.value)}
+                                variant="outlined"
                             >
                                 <option value="LOW">Low</option>
                                 <option value="MEDIUM">Medium</option>
@@ -87,7 +91,7 @@ const QuoteForm = () => {
                             needConfirm={false}
                             className="dark:text-gray-400 bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
                             value={date}
-                            suffixIcon={<CalendarIcon width="16" height="16"/>} 
+                            suffixIcon={<CalendarIcon width="16" height="16" />}
 
                         />
                     </div>
@@ -103,7 +107,7 @@ const QuoteForm = () => {
                             className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400"
                             placeholder="Select a time"
                             format="HH:mm"
-                            suffixIcon={<ClockIcon width="16" height="16"/>} 
+                            suffixIcon={<ClockIcon width="16" height="16" />}
                         />
                     </div>
                 </div>
@@ -113,7 +117,7 @@ const QuoteForm = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-password">
                             Description
                         </label>
-                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  input-field " id="grid-password" placeholder="Enter a description here..."
+                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-600" id="grid-password" placeholder="Enter a description here..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
@@ -121,12 +125,13 @@ const QuoteForm = () => {
                 </div>
 
                 <div className="flex justify-end">
-                    <button
+                    <Button
+                        fullWidth
                         type="submit"
                         onClick={handleSubmit}
-                        className=" border-2 border-gray-800 py-3 px-3 mx-2 rounded-lg hover:bg-gray-800 hover:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800 dark:border-gray-200">
+                        className=" border-2 border-gray-800 py-3 px-3  hover:bg-gray-800 hover:text-gray-200 dark:bg-transparent dark:hover:bg-gray-300 dark:hover:text-gray-700 dark:border-gray-300">
                         Add quote
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>

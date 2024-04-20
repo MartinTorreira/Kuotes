@@ -103,7 +103,7 @@ const Register = () => {
 
                 <InputForm
                     label="Confirm password"
-                    type="password2"
+                    type="password"
                     placeholder="Password"
                     value={password2}
                     onChange={(e) => setPassword2(e.target.value)}

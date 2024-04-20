@@ -6,10 +6,11 @@ import { dateConverter } from '../utils/DateUtils.js';
 import { useContext } from 'react';
 import { LoginContext } from '../user/LoginContext.js';
 import { config } from '../../config/constants.js';
-import QuoteForm from '../forms/QuoteForm.js';
+import QuoteForm from './QuoteForm.js';
 import CloseIcon from '../../icons/CloseIcon.js';
-import AddQuoteIcon from '../../icons/AddQuoteIcon.js';
+import TaskIcon from '../../icons/TaskIcon.js';
 import DeleteQuote from '../../icons/DeleteQuote.js';
+import { Button } from "@material-tailwind/react";
 
 const ShowQuotes = () => {
     const { quotes, setQuotes, removeQuote } = useQuoteStore();
@@ -55,7 +56,7 @@ const ShowQuotes = () => {
     useEffect(() => {
         getQuotes(
             quoteList => {
-                const sortedQuotes = [...quoteList].sort((a, b) => new Date(b.date) - new Date(a.date));
+                const sortedQuotes = [...quoteList].sort((a, b) => new Date(a.date) - new Date(b.date));
                 setQuotes(sortedQuotes);
             },
             error => console.error("Error al cargar citas:", error)
@@ -66,7 +67,7 @@ const ShowQuotes = () => {
     return (
         <>
             {isOpen && (
-                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center ">
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-20">
                     <div className="modal-overlay absolute w-full h-full backdrop-filter backdrop-blur-[5px]" onClick={toggleModal}></div>
                     <div className="modal-container bg-white mx-auto rounded shadow-lg z-50 border-2 border-gray-300 dark:border-gray-600 transition-all w-full sm:max-w-lg md:max-w-lg">
                         <div className="p-4 modal-content text-left dark:bg-[#29292E] bg-gray-200"  >
@@ -87,7 +88,7 @@ const ShowQuotes = () => {
             <div className='mt-20 flex flex-row items-center justify-center gap-x-2'>
                 <h1 className="text-center font-bold text-3xl text-gray-900 dark:text-gray-100 mt-5 mb-10 p-2  underline underline-offset-8 decoration-green-400">Your quotes</h1>
             </div>
-            <div className="shadow-xl md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[400px] overflow-y-auto">
+            <div className="shadow-xl md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[400px] overflow-y-auto ">
                 <ul>
                     {quotes.map((quote, index) => (
                         <li key={index}
@@ -119,9 +120,11 @@ const ShowQuotes = () => {
                     ))}
                 </ul>
             </div>
-            <div className="flex flex-row mt-4 px-2 py-2 gap-x-1 sm:px-6  dark:bg-gray-700/50 items-center justify-between cursor-pointer bg-gray-200 hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-gray-500 border-y border-gray-400 dark:border-gray-500">
-                <AddQuoteIcon />
-                <button onClick={toggleModal} className="sm:text-s leading-6 text-gray-900 dark:text-gray-200 ">Add new quote</button>
+            <div className="relative flex items-center gap-4 mt-6">
+                <Button className="flex items-center gap-3 relative z-10 text-gray-800 bg-gray-200 dark:text-gray-200 dark:bg-gray-900 hover:scale-105 transition-all" onClick={toggleModal}>
+                    <TaskIcon width="20" height="20" className="dark:text-gray-200 text-gray-800" />
+                    Add quote
+                </Button>
             </div>
         </>
     );

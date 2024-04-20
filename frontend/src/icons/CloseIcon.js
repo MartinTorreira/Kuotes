@@ -1,7 +1,7 @@
 const CloseIcon = () => {
     return (
         <svg
-            className="dark:text-gray-200 text-gray-800 fill-current dark:hover:text-red-500 hover:text-red-500"
+            className="dark:text-gray-200 text-gray-800 fill-current dark:hover:text-red-600 hover:text-red-600"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"

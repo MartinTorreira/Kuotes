@@ -9,8 +9,8 @@ import {Account} from './components/user/Account';
 import '@fontsource-variable/onest';
 import 'react-toastify/dist/ReactToastify.css';
 import ShowQuotes from './components/quote/ShowQuotes';
-
-
+import CalendarComponent from './components/Calendar';
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 function App() {
 
@@ -26,6 +26,7 @@ function App() {
             <Route path="/users/account" element={<Account/>} />      
             <Route path="/users/profile" element={<Profile/>} />
             <Route path="/quotes/show" element={<ShowQuotes/>} />
+            <Route exact path="/quotes/calendar" element={<CalendarComponent/>} />
           </Routes>
       </BrowserRouter>
     </div>
