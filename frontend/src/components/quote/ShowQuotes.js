@@ -41,9 +41,13 @@ const ShowQuotes = () => {
     }, [setToken, setUser, token]);
 
 
-    const handleDeleteQuote = (quoteId) => {
-        deleteQuote(quoteId);
-        removeQuote(quoteId)
+    const handleDeleteQuote = async (quoteId) => {
+        try {
+            await deleteQuote(quoteId);
+            removeQuote(quoteId);
+        } catch (error) {
+            console.error("Error al eliminar la cita:", error);
+        }
     };
 
     const onSuccess = (quoteList) => {
@@ -54,16 +58,6 @@ const ShowQuotes = () => {
     const onErrors = () => {
         console.log("errors");
     };
-
-    useEffect(() => {
-        getQuotes(
-            quoteList => {
-                const sortedQuotes = [...quoteList].sort((a, b) => new Date(a.date) - new Date(b.date));
-                setQuotes(sortedQuotes);
-            },
-            error => console.error("Error al cargar citas:", error)
-        );
-    }, []);
 
 
     return (
@@ -80,7 +74,7 @@ const ShowQuotes = () => {
                                 </button>
                             </div>
                             <div className="modal-fade"  >
-                                <QuoteForm hasError={hasError}/>
+                                <QuoteForm hasError={hasError} />
                             </div>
                         </div>
                     </div>
@@ -94,25 +88,26 @@ const ShowQuotes = () => {
                 <ul>
                     {quotes.map((quote, index) => (
                         <li key={index}
-                            className={index > 0 ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-[#332e38] border-t border-gray-100 dark:border-gray-700 transition duration-300 ease-in-out" : "dark:hover:bg-[#332e38] dark:hover:bg-opacity-30 cursor-pointer hover:bg-gray-100 hover:bg-opacity-100 transition duration-300 ease-in-out"}
+                            className={index > 0 ? "cursor-pointer hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-[#332e38] border-t border-gray-200 dark:border-gray-700/40 transition duration-300 ease-in-out" : "dark:hover:bg-[#332e38] dark:hover:bg-opacity-30 cursor-pointer hover:bg-gray-100 hover:bg-opacity-100 transition duration-300 ease-in-out"}
                             onClick={() => toggleAccordion(quote.id)}>
-                            <div className="px-2 py-3 sm:px-6 flex items-center justify-between">
-                                <div className=''>
-                                    <h3 className="sm:text-lg leading-6 text-gray-900 dark:text-gray-200 ">{quote.title}</h3>
-                                    <div className='flex flex-row gap-x-2 items-center justify-start'>
-                                        <p className="mt-1 max-w-xs sm:max-w-2xl text-xs sm:text-xxs text-gray-500 dark:text-gray-400">{dateConverter(quote.date)}</p>
-                                        <span className={`${importanceBg(quote.importance)} rounded-full text-xs px-1 mt-1`}>
-                                            {lowerCaseExceptFirst(quote.importance)}
-                                        </span>
+                            {quote.userDto.id === JSON.parse(localStorage.getItem("user")).id ?
+                                <div className="px-2 py-3 sm:px-6 flex items-center justify-between">
+                                    <div className=''>
+                                        <h3 className="sm:text-lg leading-6 text-gray-900 dark:text-gray-200 ">{quote.title}</h3>
+                                        <div className='flex flex-row gap-x-2 items-center justify-start'>
+                                            <p className="mt-1 max-w-xs sm:max-w-2xl text-xs sm:text-xxs text-gray-500 dark:text-gray-400">{dateConverter(quote.date)}</p>
+                                            <span className={`${importanceBg(quote.importance)} rounded-full text-xs px-1 mt-1`}>
+                                                {lowerCaseExceptFirst(quote.importance)}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center gap-x-1">
-                                    <button onClick={() => handleDeleteQuote(quote.id)}>
-                                        <DeleteQuote />
-                                    </button>
-                                </div>
-                            </div>
-
+                                    <div className="flex items-center gap-x-1">
+                                        <button onClick={() => handleDeleteQuote(quote.id)}>
+                                            <DeleteQuote />
+                                        </button>
+                                    </div>
+                                </div> : null
+                            }
                             {expandedId === quote.id && (
                                 <div className="px-2 py-3 sm:px-6">
                                     <p className="text-sm text-gray-600 dark:text-gray-200">{quote.description}</p>
