@@ -5,7 +5,7 @@ import { LoginContext } from "./LoginContext";
 
 const Profile = () => {
 
-    const {token, setToken, setUser} = useContext(LoginContext);    
+    const {token} = useContext(LoginContext);    
 
     return(
         <div className="w-full mt-10">

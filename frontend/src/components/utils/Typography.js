@@ -34,3 +34,19 @@ export const importanceBg = (importance) => {
             return 'bg-gray-500 dark:bg-gray-800/40 text-gray-700 dark:text-gray-300';
     }
 };
+
+
+export const getColorByImportance = (importance) => {
+    switch (importance) {
+      case 'LOW':
+      return 'gray'; 
+      case 'MEDIUM':
+        return 'green'; 
+      case 'HIGH':
+        return 'blue';
+      case 'CRITICAL':
+        return 'red'; 
+      default:
+        return '#00b77a';
+    }
+  };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useQuoteStore from '../store/useQuoteStore';
-import { deleteQuote, getQuotes } from '../../backend/quoteService.js';
+import { deleteQuote } from '../../backend/quoteService.js';
 import { importanceBg, lowerCaseExceptFirst } from '../utils/Typography.js';
 import { dateConverter } from '../utils/DateUtils.js';
 import { useContext } from 'react';
@@ -13,7 +13,7 @@ import DeleteQuote from '../../icons/DeleteQuote.js';
 import { Button } from "@material-tailwind/react";
 
 const ShowQuotes = () => {
-    const { quotes, setQuotes, removeQuote } = useQuoteStore();
+    const { quotes, removeQuote } = useQuoteStore();
     const [expandedId, setExpandedId] = useState(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -50,14 +50,14 @@ const ShowQuotes = () => {
         }
     };
 
-    const onSuccess = (quoteList) => {
-        const sortedQuotes = [...quoteList].sort((a, b) => new Date(b.date) - new Date(a.date));
-        setQuotes(sortedQuotes);
-    };
+    // const onSuccess = (quoteList) => {
+    //     const sortedQuotes = [...quoteList].sort((a, b) => new Date(b.date) - new Date(a.date));
+    //     setQuotes(sortedQuotes);
+    // };
 
-    const onErrors = () => {
-        console.log("errors");
-    };
+    // const onErrors = () => {
+    //     console.log("errors");
+    // };
 
 
     return (
