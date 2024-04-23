@@ -36,7 +36,7 @@ export const Navbar = () => {
 
   const handleLogOut = () => {
     setToken(null);
-    toast.success("Logged out successfully", {
+    toast.success("You are logged out", {
       position: "bottom-center",
       hideProgressBar: true,
 
@@ -56,14 +56,18 @@ export const Navbar = () => {
       {/* Profile dropdown */}
       <div className="flex gap-4">
         {token != null ? <>
-          <button alt="your tasks" title='Your tasks' onClick={handleNavigate("/quotes/show")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+          <button alt="your tasks" title='Your tasks' onClick={handleNavigate("/quotes/show")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer bg-gray-100 rounded-lg p-1 hover:bg-[#e0e0e0] transition-all text-sm dark:bg-gray-700/20 dark:hover:bg-gray-700/5'>
             <TaskIcon heigh="24" width="24" />
+            Tasks
           </button>
-          <button alt="calendar" title='Show calendar' onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer'>
+          <button alt="calendar" title='Show calendar' onClick={handleNavigate("/quotes/calendar")} className='flex flex-row gap-x-2 justify-center items-center text-center cursor-pointer bg-gray-100 rounded-lg p-1 hover:bg-[#e0e0e0] transition-all text-sm dark:bg-gray-700/20 dark:hover:bg-gray-700/5'>
             <CalendarIcon heigh="24" width="24" />
+            Calendar
           </button> </> : null}
-        <Switcher />
-        {token != null ? 
+        <span className='flex flex-row mt-1'>
+          <Switcher />
+        </span>
+        {token != null ?
           <img
             src="profile.png"
             alt="Profile"
@@ -74,7 +78,7 @@ export const Navbar = () => {
 
         {/* Dropdown content */}
         {profileDropdown && (
-          <ul className="absolute top-12 right-10 dark:bg-[#25252F] dark:text-white border rounded shadow-md p-2 justify-center text-center">
+          <ul className="absolute top-12 right-10 dark:bg-gray-800/5 solid dark:text-white border rounded shadow-md p-2 justify-center text-center">
             <li className="p-2 cursor-pointer dark:hover:bg-white dark:hover:text-[#25252F] white:hover:bg-[#25252F]" onClick={() => setProfileDropdown(false)}>
               <Link to="users/profile">Your profile</Link>
             </li>

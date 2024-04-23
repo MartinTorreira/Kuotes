@@ -7,6 +7,8 @@ import ClockIcon from "../../icons/ClockIcon";
 import CalendarIcon from "../../icons/CalendarIcon";
 import { Button } from "@material-tailwind/react";
 import { toast } from "react-toastify";
+import useQuoteStore from "../store/useQuoteStore";
+
 
 
 const QuoteForm = () => {
@@ -19,11 +21,11 @@ const QuoteForm = () => {
     const [endDate, setEndDate] = useState(null);
     const [endHour, setEndHour] = useState(dayjs('12:00', 'HH:mm'));
 
-    const [endDateDisabled, setEndDateDisabled] = useState(true);
+    const [endDateDisabled, setEndDateDisabled] = useState(false);
 
     const [hasError, setHasError] = useState(false);
 
-
+    const { quoteList, setQuoteList } = useQuoteStore();
 
     const disabledStartDate = (current) => {
         if (endDate && current && current > endDate.endOf('day')) {
@@ -67,37 +69,19 @@ const QuoteForm = () => {
 
     const onSuccess = () => {
         console.log("QUOTE CREATED");
+        setQuoteList([...quoteList, getParams(date, endDate)]); 
     }
 
     const onErrors = () => {
-        console.log("ERROR")
-        toast.error('Error creating quote.', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 3000,
-            closeButton: true,
-            closeOnClick: true,
-            draggable: true,
-            hideProgressBar: false,
-            pauseOnHover: true,
-            progress: undefined,
-        });
+        console.log("ERROR");
     }
 
     const handleSubmit = (e) => {
-
         if (date.toISOString() === endDate.toISOString() && hour.hour() > endHour.hour()) {
             setEndDate("");
             setHasError(true); 
-            toast.error("End date must be after start date", {
-                position: "bottom-center",
-                autoClose: 3000,
-                closeButton: true,
-                closeOnClick: true,
-                draggable: true,
-                hideProgressBar: false,
-                pauseOnHover: true,
-                progress: undefined,
-            });
+            toast.error("End date must be after start date");
+            return;
         }
 
         const combinedDateTime = dayjs(date).set('hour', hour.hour()).set('minute', hour.minute());
@@ -115,7 +99,7 @@ const QuoteForm = () => {
                         <label className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-last-name">
                             Title *
                         </label>
-                        <input className="bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-200" id="grid-first-name" type="text" placeholder="A title"
+                        <input className="bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-200" id="grid-first-name" type="text" placeholder="A title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -126,15 +110,15 @@ const QuoteForm = () => {
                         </label>
                         <div className="relative">
                             <select
-                                className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 dark:text-white text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400 input-field focus:ring-gray-600 dark:focus:ring-gray-200 " id="grid-state"
+                                className="block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight text bg-gray-200 border-2 border-gray-400 text-gray-900 dark:text-gray-200 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-gray-400 input-field focus:ring-gray-600 dark:focus:ring-gray-200 " id="grid-state"
                                 value={importance}
                                 onChange={(e) => setImportance(e.target.value)}
                                 variant="outlined"
                             >
-                                <option value="LOW">Low</option>
-                                <option value="MEDIUM">Medium</option>
-                                <option value="HIGH">High</option>
-                                <option value="CRITICAL">Critical</option>
+                                <option className="dark:bg-gray-900/95 dark:text-gray-900 dark:text-white" value="LOW">Low</option>
+                                <option className="dark:bg-gray-900/95 dark:text-gray-900 dark:text-white" value="MEDIUM">Medium</option>
+                                <option className="dark:bg-gray-900/95 dark:text-gray-900 dark:text-white" value="HIGH">High</option>
+                                <option className="dark:bg-gray-900/95 dark:text-gray-900 dark:text-white" value="CRITICAL">Critical</option>
                             </select>
                         </div>
                     </div>
@@ -148,10 +132,9 @@ const QuoteForm = () => {
                             onChange={date => setDate(date)}
                             disabledDate={disabledStartDate}
                             needConfirm={false}
-                            className="dark:text-white placeholder-red-900 bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus-ring-gray-200"
+                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-white"
                             value={date}
                             suffixIcon={<CalendarIcon width="16" height="16" />}
-
                         />
                     </div>
 
@@ -163,7 +146,7 @@ const QuoteForm = () => {
                             onChange={(e) => setHour(e)}
                             defaultOpenValue={dayjs('00:00', 'HH:mm')}
                             value={hour}
-                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400"
+                            className="placeholder-red-900 bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-gray-200"
                             placeholder="Select a time"
                             format="HH:mm"
                             suffixIcon={<ClockIcon width="16" height="16" />}
@@ -181,7 +164,7 @@ const QuoteForm = () => {
                             disabled={endDateDisabled}
                             disabledDate={disabledEndDate}
                             needConfirm={false}
-                            className="dark:text-gray-400 bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white "
+                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-gray-200"
                             value={endDate}
                             suffixIcon={<CalendarIcon width="16" height="16" />}
 
@@ -198,7 +181,7 @@ const QuoteForm = () => {
                             value={endHour}
                             disabled={endDateDisabled}
                             disabledTime={disabledEndHours}
-                            className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded  block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:text-gray-400"
+                            className="bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-gray-200"
                             placeholder="Select a time"
                             format="HH:mm"
                             suffixIcon={<ClockIcon width="16" height="16" />}
@@ -211,7 +194,7 @@ const QuoteForm = () => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 dark:text-gray-200" htmlFor="grid-password">
                             Description
                         </label>
-                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-[#29292E] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-600" id="grid-password" placeholder="Enter a description here..."
+                        <textarea className="resize-none appearance-none block w-full py-3 px-4 mb-3 text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white input-field focus:ring-gray-600 dark:focus:ring-gray-600" id="grid-password" placeholder="Enter a description here..."
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />

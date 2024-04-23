@@ -9,11 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
 
-}
-
-/* Light Mode */
 .rbc-calendar {
   color: #333;
 }
@@ -36,14 +32,6 @@ code {
   background-color: #e6f7ff;
 }
 
-.rbc-timeslot-group {
-  border-bottom: 1px solid #ccc;
-}
-
-.rbc-timeslot {
-  border-right: 1px solid #ccc;
-}
-
 .rbc-event {
   background-color: #00b77a; 
   color: #fff;
@@ -63,7 +51,6 @@ code {
   color: #333;
 }
 
-/* Dark Mode */
 .dark .rbc-calendar {
   color: #e0e0e0;
 }
@@ -74,7 +61,6 @@ code {
 }
 
 .dark .rbc-btn-group {
-  display: inline-block;
   color: #e0e0e0;
 }
 
@@ -88,15 +74,12 @@ code {
   background-color: #444;
 }
 
-
 .dark .rbc-event {
-  background-color: #00b77a; 
   color: #fff;
   border: none;
 }
 
 .dark .rbc-selected {
-  background-color: #00b77a;
   color: #fff;
 }
 

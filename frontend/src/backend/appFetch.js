@@ -117,7 +117,9 @@ export const fetchConfig = (method, body) => {
 	return fConfig;
 };
 
-export const appFetch = (path, options, onSuccess, onErrors) => 
-     fetch(`${config.BASE_PATH}${path}`, options)
+export const appFetch = (path, options, onSuccess, onErrors) => { 
+	fetch(`${config.BASE_PATH}${path}`, options)
         .then((response) => handleResponse(response, onSuccess, onErrors))
         .catch(networkErrorCallback);
+
+}

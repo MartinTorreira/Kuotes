@@ -6,7 +6,7 @@ export default function Switcher() {
   const {darkSide, toggleDarkMode } = useTheme();
 
   return (
-      <div className='flex mt-1'>
+      <div className='flex'>
         <DarkModeSwitch checked={darkSide} onChange={toggleDarkMode} size={24} />
       </div>
   );

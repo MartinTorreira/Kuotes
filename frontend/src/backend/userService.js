@@ -21,7 +21,6 @@ export const login = (
   onErrors,
   reauthenticationCallback
 ) => {
-  console.log(userName, password, onSuccess, onErrors, reauthenticationCallback)
   appFetch(
     "/users/login",
     fetchConfig("POST", { userName, password }),

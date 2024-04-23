@@ -8,6 +8,7 @@ import {getColorByImportance} from '../components/utils/Typography.js';
 const localizer = momentLocalizer(moment);
 
 const CalendarComponent = () => {
+  
   const [events, setEvents] = useState([]);
   const { quotes, getUserQuotes } = useQuoteStore();
   const [key, setKey] = useState(0);

@@ -12,7 +12,11 @@ root.render(
   <React.StrictMode>
     <LoginProvider>
       <ThemeProvider>
-        <ToastContainer />
+        <ToastContainer
+          theme="dark:dark light border border-gray-800 dark:border-gray-400 dark:text-gray-200 dark:bg-gray-900/10"
+          position="bottom-center"
+          hideProgressBar={true}
+        />
         <App />
       </ThemeProvider>
     </LoginProvider>

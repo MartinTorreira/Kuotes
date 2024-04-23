@@ -41,11 +41,11 @@ export const getColorByImportance = (importance) => {
       case 'LOW':
       return 'gray'; 
       case 'MEDIUM':
-        return 'green'; 
+        return '#51BE34'; 
       case 'HIGH':
-        return 'blue';
+        return '#3C92C4';
       case 'CRITICAL':
-        return 'red'; 
+        return '#D72B2B'; 
       default:
         return '#00b77a';
     }
