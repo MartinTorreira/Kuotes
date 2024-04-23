@@ -25,7 +25,7 @@ const QuoteForm = () => {
 
     const [hasError, setHasError] = useState(false);
 
-    const { quoteList, setQuoteList } = useQuoteStore();
+    const { quoteList, setQuotes } = useQuoteStore();
 
     const disabledStartDate = (current) => {
         if (endDate && current && current > endDate.endOf('day')) {
@@ -67,9 +67,9 @@ const QuoteForm = () => {
         return quote;
     }
 
-    const onSuccess = () => {
+    const onSuccess = (quote) => {
         console.log("QUOTE CREATED");
-        setQuoteList([...quoteList, getParams(date, endDate)]); 
+        setQuotes((prevQuotes) => [...prevQuotes, quote]);
     }
 
     const onErrors = () => {
@@ -77,6 +77,7 @@ const QuoteForm = () => {
     }
 
     const handleSubmit = (e) => {
+        //e.preventDefault();
         if (date.toISOString() === endDate.toISOString() && hour.hour() > endHour.hour()) {
             setEndDate("");
             setHasError(true); 
@@ -87,7 +88,7 @@ const QuoteForm = () => {
         const combinedDateTime = dayjs(date).set('hour', hour.hour()).set('minute', hour.minute());
         const combinedEndDateTime = dayjs(endDate).set('hour', endHour.hour()).set('minute', endHour.minute());
         const quote = getParams(combinedDateTime, combinedEndDateTime);
-        createQuote(quote, onSuccess, onErrors);
+        createQuote(quote, onSuccess(quote), onErrors);
     }
 
 

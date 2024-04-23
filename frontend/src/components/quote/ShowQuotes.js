@@ -14,7 +14,7 @@ import { getQuotes } from '../../backend/quoteService.js';
 
 const ShowQuotes = () => {
 
-    const { quotes, removeQuote, setQuotes } = useQuoteStore();
+    const { userQuotes, removeQuote, setQuotes, setUserQuotes } = useQuoteStore();
     const [expandedId, setExpandedId] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const { token, setToken, setUser } = useContext(LoginContext);
@@ -45,14 +45,14 @@ const ShowQuotes = () => {
                     const sortedQuotes = [...quoteList].sort((a, b) => new Date(a.date) - new Date(b.date));
                     setQuotes(sortedQuotes);
                     const userQuotes = sortedQuotes.filter(quote => quote.userDto.id === JSON.parse(localStorage.getItem("user")).id);
-                    setQuotes(userQuotes);
+                    setUserQuotes(userQuotes);
                 },
                 error => {
                     console.error("Error fetching quotes:", error);
                 }
             );
         }
-    }, [token, setQuotes]);
+    }, [token, setQuotes, setUserQuotes]);
 
     const handleDeleteQuote = async (quoteId) => {
         try {
@@ -88,7 +88,7 @@ const ShowQuotes = () => {
             {/* Quotes List */}
             <div className="shadow-md md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[300px] overflow-y-auto mt-20">
                 <ul>
-                    {quotes.map((quote, index) => (
+                    { userQuotes.map((quote, index) => (
                         <li key={index} className="cursor-pointer hover:bg-gray-100 dark:hover:bg-opacity-30 dark:hover:bg-[#332e38] border-t border-gray-200 dark:border-gray-700/40 transition duration-300 ease-in-out" onClick={() => toggleAccordion(quote.id)}>
                             <div className="px-2 py-2 sm:px-4 flex items-center justify-between">
                                 <div className=''>
