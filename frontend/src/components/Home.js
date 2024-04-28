@@ -18,6 +18,7 @@ const Home = () => {
       setUser(JSON.parse(user));
     }
 
+    if(!token) return;
     getQuotes(
       quoteList => {
         const sortedQuotes = [...quoteList].sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -25,15 +26,19 @@ const Home = () => {
         setQuotes(userQuotes);
       },
       error => {
+        if (error.response && error.response.status === 401) {
+          <Account />;
+        }
         console.error("Error fetching quotes:", error);
       }
     );
-  }, [setToken, setUser, setQuotes]);
+
+  }, [setToken, setUser, setQuotes, token]);
 
   return (
-    <>
+    <div className="flex justify-center items-start">
       {token ? <LandingPage /> : <Account />}
-    </>
+    </div>
   );
 };
 

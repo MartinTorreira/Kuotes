@@ -34,8 +34,11 @@ const Login = () => {
 
 
     const onSuccess = (authenticatedUser) => {
+
+
         setToken(authenticatedUser.serviceToken);
         setUser(authenticatedUser.user);
+
 
         localStorage.setItem(
             config.SERVICE_TOKEN_NAME,

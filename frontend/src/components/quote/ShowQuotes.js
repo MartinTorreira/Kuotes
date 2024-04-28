@@ -52,14 +52,16 @@ const ShowQuotes = () => {
                 }
             );
         }
+
     }, [token, setQuotes, setUserQuotes]);
 
     const handleDeleteQuote = async (quoteId) => {
         try {
+            console.log(quoteId);
             deleteQuote(quoteId);
-            removeQuote(quoteId);
+          //  removeQuote(quoteId);
         } catch (error) {
-            console.error("Error deleting quote:", error);
+            console.log("Error deleting quote:", error);
         }
     };
 
@@ -85,7 +87,7 @@ const ShowQuotes = () => {
                 </div>
             )}
 
-            {/* Quotes List */}
+            {/* Quote list */}
             <div className="shadow-md md:w-2/3 lg:w-1/2 xl:w-1/3 mx-auto max-h-[300px] overflow-y-auto mt-20">
                 <ul>
                     { userQuotes.map((quote, index) => (

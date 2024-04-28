@@ -25,21 +25,12 @@ const QuoteForm = () => {
 
     const [hasError, setHasError] = useState(false);
 
-    const { quoteList, setQuotes } = useQuoteStore();
+    const { setQuotes } = useQuoteStore();
 
-    const disabledStartDate = (current) => {
-        if (endDate && current && current > endDate.endOf('day')) {
-            return true;
-        }
 
-        if (current && current < dayjs().startOf('day')) {
-            setEndDateDisabled(true);
-            return true;
-        }
-
-        setEndDateDisabled(false);
-        return false;
-    };
+    const disableBeforeToday = (current) => {
+        return current && current < dayjs().startOf('day');
+    }
 
     const disabledEndDate = (current) => {
         if (date && current && current < date.startOf('day')) {
@@ -88,12 +79,12 @@ const QuoteForm = () => {
         const combinedDateTime = dayjs(date).set('hour', hour.hour()).set('minute', hour.minute());
         const combinedEndDateTime = dayjs(endDate).set('hour', endHour.hour()).set('minute', endHour.minute());
         const quote = getParams(combinedDateTime, combinedEndDateTime);
-        createQuote(quote, onSuccess(quote), onErrors);
+        createQuote(quote,() =>  onSuccess(quote), onErrors);
     }
 
 
     return (
-        <div className="grid items-right gap-x-4 p-4 px-3 py-2 mt-5 ">
+        <div className="grid items-right gap-x-4 p-4 px-3 py-2 mt-5">
             <form className="w-full max-w-lg" >
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -131,11 +122,11 @@ const QuoteForm = () => {
                         </label>
                         <DatePicker
                             onChange={date => setDate(date)}
-                            disabledDate={disabledStartDate}
                             needConfirm={false}
                             className="text bg-gray-200 border-2 border-gray-400 text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-900/10 dark:border-gray-600 dark:text-white"
                             value={date}
                             suffixIcon={<CalendarIcon width="16" height="16" />}
+                            disabledDate={disableBeforeToday}
                         />
                     </div>
 
