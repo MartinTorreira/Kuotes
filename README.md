@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# PA Project 
+# Kuotes
 
 ## Requirements
 
@@ -34,5 +33,4 @@ cd frontend
 npm install (only first time to download libraries)
 npm start
 ```
-=======
-# Webapp
+
